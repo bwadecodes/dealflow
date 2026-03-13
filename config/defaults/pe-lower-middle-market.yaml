@@ -1,0 +1,107 @@
+# Dealflow Diligence Configuration
+# Template: PE Lower-Middle Market
+# Focus: Financial rigor, quality of earnings, margin analysis
+version: 1
+
+rubric:
+  categories:
+    - name: "Product / Service"
+      weight: high
+      questions:
+        - "What job is the product doing for the customer?"
+        - "Is it easily replicable or replaceable?"
+        - "How is the product evolving? What does the roadmap look like?"
+        - "What is the switching cost for customers?"
+        - "How differentiated is the offering vs. competitors?"
+
+    - name: "Revenue"
+      weight: high
+      questions:
+        - "What is the business model — how does the company make money?"
+        - "What is the revenue mix (recurring vs. one-time, product vs. services)?"
+        - "What is driving the growth rate? Is it volume, pricing, or new products?"
+        - "Are growth trends sustainable or driven by one-time events?"
+        - "What does the customer concentration look like — top 10 as % of revenue?"
+        - "What is net revenue retention?"
+
+    - name: "Gross Margin"
+      weight: high
+      questions:
+        - "What does gross margin say about where the product sits in the value chain?"
+        - "How has gross margin trended over the last 3 years?"
+        - "What are the key COGS line items and what drives them?"
+        - "What are the supply chain risks?"
+        - "Are there margin expansion opportunities with scale?"
+
+    - name: "Quality of Earnings"
+      weight: high
+      questions:
+        - "What are the key QoE adjustments?"
+        - "How much of EBITDA is from recurring vs. non-recurring items?"
+        - "Are there owner add-backs? How defensible are they?"
+        - "What is the cash conversion of earnings?"
+        - "Are there any revenue recognition concerns?"
+
+    - name: "Overhead / Investments"
+      weight: medium
+      questions:
+        - "Is the team properly resourced to deliver on the growth plan?"
+        - "What investments does the company need to make in the next 12-24 months?"
+        - "What does the org chart look like — any key-person dependencies?"
+        - "What is the SG&A trend as a percentage of revenue?"
+
+    - name: "Balance Sheet"
+      weight: medium
+      questions:
+        - "How much working capital does the business need?"
+        - "What are the debt obligations and covenants?"
+        - "Are there any off-balance-sheet liabilities?"
+        - "What is the CapEx profile — maintenance vs. growth?"
+        - "What does the cash conversion cycle look like?"
+
+    - name: "Market / Competitors"
+      weight: high
+      questions:
+        - "What is the total addressable market? How was it sized?"
+        - "Who are the key competitors — their revenue, margins, positioning?"
+        - "What is the competitive moat — brand, technology, network effects, regulation?"
+        - "What does M&A activity look like in the sector? Who are the acquirers?"
+        - "What are the key market risks — regulatory, technology shifts, macro?"
+
+    - name: "Team / Management"
+      weight: high
+      questions:
+        - "What is the management team's background and track record?"
+        - "How long has the current team been in place?"
+        - "Are they capable of operating at the next level of scale?"
+        - "How do they handle feedback and course corrections?"
+        - "What are the key hires needed post-close?"
+
+    - name: "Legal / IP"
+      weight: medium
+      questions:
+        - "Is the corporate structure and cap table clean?"
+        - "Any pending or threatened litigation?"
+        - "What IP does the company own? Is it defensible?"
+        - "Are key contracts (customer, vendor, employee) assignable?"
+        - "Any regulatory or compliance risks?"
+
+buy_box:
+  revenue_range: "$5M - $50M"
+  ebitda_range: "$1M - $10M"
+  stage: "Established, profitable or clear path"
+  ownership_target: "Control (51-100%)"
+  sector_focus:
+    - "business services"
+    - "technology-enabled services"
+    - "healthcare services"
+    - "industrial / manufacturing"
+    - "consumer"
+  profitability: "EBITDA positive or clear path within 12 months"
+  hold_period: "3-7 years"
+
+preferences:
+  output_dir: "dd-reports"
+  report_format: "markdown"
+  detail_level: "deep"
+  auto_save: true

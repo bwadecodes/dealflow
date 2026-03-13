@@ -1,0 +1,104 @@
+# Dealflow Diligence Configuration
+# Template: Growth Equity
+# Focus: Blends PE financial rigor with growth-stage metrics
+version: 1
+
+rubric:
+  categories:
+    - name: "Product / Service"
+      weight: high
+      questions:
+        - "What job is the product doing for the customer?"
+        - "How differentiated is it — what is the switching cost?"
+        - "What is the product roadmap and investment required?"
+        - "How does the product evolve as the company scales?"
+        - "Is the product platform-like (expandable) or point-solution?"
+
+    - name: "Revenue / Growth"
+      weight: high
+      questions:
+        - "What is the revenue mix (recurring, transactional, services)?"
+        - "What is the growth rate and what is driving it?"
+        - "What is net revenue retention / net dollar retention?"
+        - "How much growth is organic vs. paid vs. sales-driven?"
+        - "What does cohort-level revenue data show?"
+        - "Customer concentration — top 10 as % of revenue?"
+
+    - name: "Unit Economics"
+      weight: high
+      questions:
+        - "What is CAC by channel? How has it trended?"
+        - "What is LTV? How is it calculated?"
+        - "What is the LTV:CAC ratio by segment?"
+        - "What is the payback period?"
+        - "How do unit economics change at scale?"
+
+    - name: "Gross Margin / COGS"
+      weight: high
+      questions:
+        - "What is gross margin and how has it trended?"
+        - "What are the main COGS drivers?"
+        - "Is there a path to gross margin expansion with scale?"
+        - "How does gross margin compare to best-in-class peers?"
+
+    - name: "Operating Leverage"
+      weight: high
+      questions:
+        - "What does the OpEx structure look like as a % of revenue?"
+        - "Where is operating leverage expected — which cost lines decline as % of revenue?"
+        - "What is the path to profitability and when?"
+        - "What is the R&D spend and what is it producing?"
+
+    - name: "Market / Competitive"
+      weight: high
+      questions:
+        - "Total and serviceable addressable market?"
+        - "Market growth rate and key drivers?"
+        - "Competitive landscape — who is funded, who is profitable, who is growing?"
+        - "M&A activity in the sector — who are the strategic acquirers?"
+        - "What creates defensibility — network effects, data, brand, regulation?"
+
+    - name: "Team / Management"
+      weight: high
+      questions:
+        - "Management team background and track record?"
+        - "Has the team operated at this scale before?"
+        - "Key hires needed in the next 12 months?"
+        - "Board composition and governance?"
+        - "How does management handle feedback and pivots?"
+
+    - name: "Balance Sheet / Cash"
+      weight: medium
+      questions:
+        - "What is the current cash position and burn rate?"
+        - "Working capital requirements?"
+        - "Existing debt and terms?"
+        - "CapEx profile — maintenance vs. growth?"
+        - "When does the business become cash-flow positive?"
+
+    - name: "Legal / IP"
+      weight: medium
+      questions:
+        - "Cap table — clean? Any unusual terms, liquidation preferences, anti-dilution?"
+        - "IP ownership and defensibility?"
+        - "Key contracts — assignability, change of control provisions?"
+        - "Regulatory risks?"
+
+buy_box:
+  revenue_range: "$5M - $25M"
+  stage: "Series A, Series B, Growth"
+  ownership_target: "15-30%"
+  sector_focus:
+    - "software / SaaS"
+    - "fintech"
+    - "healthcare tech"
+    - "marketplace"
+    - "consumer technology"
+  profitability: "Path to profitability within 18-24 months"
+  hold_period: "4-7 years"
+
+preferences:
+  output_dir: "dd-reports"
+  report_format: "markdown"
+  detail_level: "deep"
+  auto_save: true

@@ -1,0 +1,96 @@
+# Dealflow Diligence Configuration
+# Template: VC Seed / Pre-Seed
+# Focus: Team, market, product-market fit, burn and runway
+version: 1
+
+rubric:
+  categories:
+    - name: "Team / Founders"
+      weight: high
+      questions:
+        - "What is the founding team's background? Why are they the right people for this?"
+        - "How did the founders meet? How long have they worked together?"
+        - "What is the equity split and vesting structure?"
+        - "How do they make decisions when they disagree?"
+        - "What is their ability to recruit — can they attract strong talent?"
+        - "Full-time commitment from all founders?"
+
+    - name: "Market / TAM"
+      weight: high
+      questions:
+        - "What is the market size — bottom-up TAM, SAM, SOM?"
+        - "Is the market growing? What is driving the growth?"
+        - "Is this a new market being created or an existing market being disrupted?"
+        - "What are the key tailwinds and headwinds?"
+        - "Why is now the right time for this product?"
+
+    - name: "Product / PMF"
+      weight: high
+      questions:
+        - "What problem does the product solve? How painful is it?"
+        - "What does the current product look like? Demo or screenshots available?"
+        - "What is the evidence of product-market fit (usage, retention, NPS, waitlist)?"
+        - "How is the product differentiated from alternatives (including doing nothing)?"
+        - "What is the product roadmap for the next 6-12 months?"
+
+    - name: "Traction / Metrics"
+      weight: high
+      questions:
+        - "What are the key metrics — users, revenue, growth rate, engagement?"
+        - "What does the growth curve look like — hockey stick, linear, stalling?"
+        - "What are the unit economics? CAC, LTV, payback period?"
+        - "What are the leading indicators of growth?"
+        - "How much of the traction is organic vs. paid?"
+
+    - name: "Business Model"
+      weight: medium
+      questions:
+        - "How does the company make money (or plan to)?"
+        - "What is the pricing model? How was it set?"
+        - "What are the expected gross margins at scale?"
+        - "Is there a path to strong unit economics?"
+
+    - name: "Burn / Runway"
+      weight: high
+      questions:
+        - "What is the current monthly burn rate?"
+        - "How many months of runway remain?"
+        - "What does the company plan to achieve before the next raise?"
+        - "What milestones would unlock the next funding round?"
+        - "What is the fundraising plan — target amount, timeline, use of proceeds?"
+
+    - name: "Competition"
+      weight: medium
+      questions:
+        - "Who are the direct and indirect competitors?"
+        - "What is the competitive advantage — technology, speed, insight, relationships?"
+        - "Are there well-funded incumbents? How does the company plan to win?"
+        - "What would it take for a large company to replicate this?"
+
+    - name: "Legal / IP / Cap Table"
+      weight: medium
+      questions:
+        - "Is the cap table clean? Any unusual terms or overhangs?"
+        - "Is the IP properly assigned to the company?"
+        - "Any outstanding legal issues or risks?"
+        - "Corporate formation — Delaware C-Corp or equivalent?"
+
+buy_box:
+  revenue_range: "Pre-revenue to $5M ARR"
+  stage: "Pre-Seed, Seed"
+  ownership_target: "10-20%"
+  sector_focus:
+    - "software"
+    - "fintech"
+    - "healthcare tech"
+    - "AI / ML"
+    - "marketplace"
+    - "consumer tech"
+  profitability: "Not expected — focus on growth and path to next round"
+  hold_period: "7-10 years"
+
+preferences:
+  output_dir: "dd-reports"
+  report_format: "markdown"
+  detail_level: "deep"
+  auto_save: true

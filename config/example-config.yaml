@@ -1,0 +1,110 @@
+# Dealflow Diligence Configuration — Example Template
+#
+# This is an annotated template you can use as a starting point.
+# Copy this file, customize it, and pass it to any /dd-* skill:
+#
+#   /dd-dataroom ~/Deals/Acme --config path/to/my-config.yaml
+#
+# Or save it to the default location and it will be picked up automatically:
+#
+#   ~/.claude/dealflow/diligence-config.yaml
+#
+# Tip: Start with /dd-setup instead of editing this by hand — it will
+# walk you through each section using one of the built-in templates
+# (PE, VC, or Growth Equity) as a starting point.
+
+version: 1
+
+# RUBRIC
+# The rubric drives everything — how the data room is assessed, what the
+# model review focuses on, and which questions get generated.
+#
+# Each category has:
+#   - name: The category label
+#   - weight: high | medium | low — determines priority in reports and question lists
+#   - questions: The specific things you want evaluated
+#
+# You can add, remove, or reorder categories. There is no fixed schema —
+# the skills will work with whatever categories you define.
+
+rubric:
+  categories:
+    - name: "Product / Service"
+      weight: high        # high = prioritized in every report and question list
+      questions:
+        - "What job is the product doing for the customer?"
+        - "Is it easily replicable or replaceable?"
+        # Add your own questions here
+
+    - name: "Revenue"
+      weight: high
+      questions:
+        - "What is the business model?"
+        - "What is driving the growth rate?"
+        - "Are growth trends sustainable?"
+
+    - name: "Gross Margin"
+      weight: high
+      questions:
+        - "What does GM say about where the product fits in the value chain?"
+        - "What are the risks in the supply chain?"
+
+    - name: "Overhead / Investments"
+      weight: medium      # medium = included in reports but not top-priority
+      questions:
+        - "Is the team properly resourced to deliver on growth?"
+        - "What investments does the company need to make?"
+
+    - name: "Balance Sheet"
+      weight: medium
+      questions:
+        - "How much working capital does the business need?"
+        - "Debt and other liabilities?"
+
+    - name: "Market / Competitors"
+      weight: high
+      questions:
+        - "Total and addressable market sizing?"
+        - "Key competitors — product, revenue, profitability?"
+        - "M&A in the sector — who are the buyers?"
+
+    - name: "Team / Management"
+      weight: high
+      questions:
+        - "Background and track record?"
+        - "Ability to accept and incorporate feedback?"
+
+    - name: "Legal / IP"
+      weight: medium
+      questions:
+        - "Corporate formation and cap table clean?"
+        - "IP ownership and defensibility?"
+
+# BUY BOX
+# Your investment criteria. The data room assessment uses this to evaluate
+# deal fit. Customize to match your fund or personal criteria.
+
+buy_box:
+  revenue_range: "$5M - $50M"
+  stage: "Series A, B, Growth"
+  ownership_target: "20-40%"
+  sector_focus:
+    - "consumer"
+    - "technology"
+    - "healthcare"
+  profitability: "profitable or clear path"
+  hold_period: "3-7 years"
+  # Add any custom fields — the skills will reference them in the buy box
+  # fit section of reports. Examples:
+  # geography: "North America"
+  # deal_size: "$5M - $25M equity check"
+  # exclusions: ["tobacco", "gambling", "weapons"]
+
+# PREFERENCES
+# Controls how reports are generated and saved.
+
+preferences:
+  output_dir: "dd-reports"        # relative to the deal folder
+  report_format: "markdown"       # markdown only in v1 (docx planned for v2)
+  detail_level: "deep"            # "executive" for shorter reports, "deep" for full analysis
+  auto_save: true                 # save reports automatically (vs. asking first)
