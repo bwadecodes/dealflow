@@ -1,10 +1,10 @@
-# Dealflow — AI-Powered Due Diligence Tools for PE & VC Investors
+# Dealflow: AI-Powered Diligence Tools for PE & VC Investors
 
 Point it at a data room folder or a financial model, and it produces the kind of analysis you'd normally spend days on — organized against your own diligence rubric.
 
 Dealflow is a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills package that gives PE and VC investors structured, AI-assisted due diligence workflows. The first release focuses on **diligence** — the highest-value, most-frequent workflow. Sourcing and post-deal modules are on the [roadmap](#roadmap).
 
-Built by [Brian Wade](https://github.com/bwadecodes), an investor who has worked across PE, growth equity, and VC — now investing independently out of Primario Holdings.
+Built by [Brian Wade](https://github.com/bwadecodes), an investor who has worked across [PE, growth equity, and VC](https://www.linkedin.com/in/brianmwade/).
 
 ---
 
@@ -171,11 +171,11 @@ Synthesizes findings from the data room assessment and model review into a singl
 ```markdown
 ## Financial / Accounting
 
-1. [Critical] The model shows gross margin improving from 52% to 68%
+1. [Critical] The model shows gross margin improving from 52% to 58%
    between Y1 and Y2 — what specifically drives this? Is there a signed
    manufacturing agreement that supports the new COGS assumptions?
 
-2. [Important] Monthly P&L shows a $45K marketing spike in March 2024
+2. [Important] Monthly P&L shows a $2mm marketing spike in March 2024
    with no corresponding revenue lift. What was this spend and what was learned?
 ```
 
@@ -189,10 +189,10 @@ The rubric is the backbone of every assessment. It determines what gets prioriti
 
 ### Three Built-In Templates
 
-| | PE Lower-Middle Market | VC Seed / Pre-Seed | Growth Equity |
+| | Private Equity | VC Seed / Pre-Seed | Growth Equity |
 |---|---|---|---|
 | **Rubric emphasis** | Financials, QoE, margins, working capital, overhead | Team, TAM, product-market fit, unit economics | Blends both — financials + growth metrics |
-| **Buy box** | Revenue $5-50M, EBITDA positive or path, proven model | Pre-revenue to $5M, high growth, large market | $5-25M revenue, growth inflection, path to profitability |
+| **Buy box** | Revenue $25-100M, EBITDA positive | Pre-revenue to $5M, high growth, large market | $5-25M revenue, growth inflection, path to profitability |
 | **Model review focus** | Assumption depth, operating leverage, cash conversion | Burn rate, runway, path to next round, CAC/LTV | Unit economics depth, channel attribution, margin expansion |
 | **Data room expectations** | Full financials, tax returns, legal, customer contracts | Lighter — pitch deck, cap table, basic financials, IP | Full room expected but tolerance for gaps in early-stage areas |
 | **Question style** | QoE-oriented, accounting detail, contract review | Market validation, team capability, product roadmap | Financial rigor + growth thesis validation |
@@ -284,7 +284,7 @@ Dealflow currently covers **diligence** — the highest-value, most-frequent inv
 
 ## About
 
-Built by [Brian Wade](https://github.com/bwadecodes). Background across PE, growth equity, and VC — now investing independently out of Primario Holdings.
+Built by [Brian Wade](https://github.com/bwadecodes). Background across [PE, growth equity, and VC]((https://www.linkedin.com/in/brianmwade/)).
 
 This started as a set of personal tools for running diligence faster without sacrificing depth. The goal is simple: spend less time on the mechanical parts of diligence so you can spend more time on the judgment calls that actually matter.
 
