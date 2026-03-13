@@ -1,0 +1,18 @@
+{
+  "name": "dealflow",
+  "description": "AI-powered due diligence tools for PE and VC investors",
+  "version": "1.0.0",
+  "author": {
+    "name": "Brian Wade",
+    "url": "https://github.com/bwadecodes"
+  },
+  "repository": "https://github.com/bwadecodes/dealflow",
+  "license": "MIT",
+  "keywords": [
+    "private-equity",
+    "venture-capital",
+    "due-diligence",
+    "finance",
+    "investing"
+  ]
+}
