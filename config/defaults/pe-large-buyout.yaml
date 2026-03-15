@@ -1,0 +1,135 @@
+# Dealflow Diligence Configuration
+# Template: PE Large Buyout
+# Focus: Leverage, platform integration, regulatory, institutional-grade operations
+version: 1
+
+rubric:
+  categories:
+    - name: "Product / Service Portfolio"
+      weight: high
+      questions:
+        - "What is the full product/service portfolio and how do the pieces fit together?"
+        - "Which product lines are growing, mature, or declining?"
+        - "What is the R&D pipeline and innovation strategy?"
+        - "How defensible is the offering at scale — patents, contracts, regulatory barriers?"
+        - "What is the customer value proposition vs. best-in-class alternatives?"
+        - "Are there adjacencies or new verticals to expand into?"
+
+    - name: "Revenue / Commercial"
+      weight: high
+      questions:
+        - "What is the revenue breakdown by segment, geography, channel, and customer type?"
+        - "What is the organic vs. acquisition-driven growth rate?"
+        - "What does customer concentration look like at the top 5, 10, and 25 level?"
+        - "What is the contracted vs. at-risk revenue mix?"
+        - "What is net revenue retention by segment?"
+        - "What is the pricing power — can the company push through price increases?"
+        - "What does the sales pipeline and go-to-market engine look like?"
+
+    - name: "Gross Margin / Cost Structure"
+      weight: high
+      questions:
+        - "What are gross margins by segment and how have they trended over 5 years?"
+        - "What are the key cost drivers — labor, materials, energy, third-party?"
+        - "What is the supply chain strategy — diversified or concentrated?"
+        - "How sensitive are margins to input cost volatility?"
+        - "What procurement optimization opportunities exist at scale?"
+        - "How does cost structure compare to public comps?"
+
+    - name: "Quality of Earnings / Financial Integrity"
+      weight: high
+      questions:
+        - "What are the material QoE adjustments — pro forma EBITDA vs. reported?"
+        - "What is the cash conversion profile — EBITDA to free cash flow?"
+        - "How clean are the accounting policies — any aggressive recognition?"
+        - "What is the normalized CapEx — maintenance vs. growth?"
+        - "What are the working capital dynamics — seasonal, structural?"
+        - "What are the off-balance-sheet obligations — leases, guarantees, pensions?"
+        - "What does the audit history look like — any restatements or qualifications?"
+
+    - name: "Capital Structure / Leverage"
+      weight: high
+      questions:
+        - "What is the proposed leverage — total, senior, and net of cash?"
+        - "What are the debt terms — covenant package, maturity wall, call protection?"
+        - "What does the interest coverage look like under base and stress scenarios?"
+        - "What is the free cash flow available for deleveraging?"
+        - "What are the refinancing risks given the maturity profile?"
+        - "How does the leverage compare to recent sponsor-backed comps?"
+        - "What is the dividend recapitalization opportunity?"
+
+    - name: "Platform Strategy / M&A"
+      weight: high
+      questions:
+        - "What is the buy-and-build thesis? How many targets are in the pipeline?"
+        - "What is the historical M&A track record — synergies realized, multiples paid?"
+        - "What is the integration playbook — IT, operations, people, go-to-market?"
+        - "What are the dis-synergy and execution risks?"
+        - "How fragmented is the market and what share can be consolidated?"
+        - "What is the expected value creation from M&A vs. organic growth?"
+
+    - name: "Operations / Infrastructure"
+      weight: high
+      questions:
+        - "How many locations, entities, and jurisdictions does the business operate across?"
+        - "What does the ERP/systems landscape look like — integrated or fragmented?"
+        - "What is the IT and cybersecurity posture — any gaps?"
+        - "What does the real estate and facilities footprint look like?"
+        - "Where are the operational improvement opportunities — lean, automation, shared services?"
+        - "What does the procurement strategy look like across the platform?"
+
+    - name: "Management / Governance"
+      weight: high
+      questions:
+        - "How deep is the management bench across all functions?"
+        - "Has the leadership team operated a business of this scale and complexity?"
+        - "What is the CEO/CFO track record — sponsor-backed experience?"
+        - "What does the board composition and governance structure look like?"
+        - "What are the management incentive structures — rollover, co-invest, MIP?"
+        - "What key hires are needed post-close?"
+        - "How does the organization handle integration and change management?"
+
+    - name: "Market / Competitive Dynamics"
+      weight: high
+      questions:
+        - "What is the TAM, SAM, and share position?"
+        - "Who are the top competitors — scale, profitability, strategy?"
+        - "What are the structural competitive advantages — brand, scale, network, regulation?"
+        - "What does the M&A landscape look like — strategic buyer interest?"
+        - "What are the macro, regulatory, and secular risks?"
+        - "What are the realistic exit paths and timeline — strategic, secondary, IPO?"
+        - "What are the relevant public and private comp valuations?"
+
+    - name: "Regulatory / Legal / ESG"
+      weight: high
+      questions:
+        - "What is the regulatory environment — current and anticipated changes?"
+        - "Any pending or material litigation — exposure and reserves?"
+        - "What is the IP portfolio and how defensible is it?"
+        - "What are the key contract provisions — change of control, assignability, termination?"
+        - "What is the ESG profile — environmental, labor, governance risks?"
+        - "What does the compliance program look like — anti-corruption, data privacy, export controls?"
+        - "Any environmental liabilities — remediation obligations, exposure?"
+        - "What does the insurance program cover — D&O, cyber, product liability?"
+
+buy_box:
+  revenue_range: "$250M+"
+  ebitda_range: "$50M+"
+  stage: "Scaled, institutional-grade"
+  ownership_target: "Control (51-100%)"
+  sector_focus:
+    - "business services"
+    - "technology / software"
+    - "healthcare"
+    - "financial services"
+    - "industrial / manufacturing"
+    - "consumer / retail"
+    - "infrastructure / logistics"
+  profitability: "Established EBITDA, stable or expanding margins"
+  hold_period: "4-7 years"
+
+preferences:
+  output_dir: "dd-reports"
+  report_format: "markdown"
+  detail_level: "deep"
+  auto_save: true

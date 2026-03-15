@@ -140,21 +140,9 @@ This doesn't remove the category --- it just changes how much emphasis it gets i
 
 ## Template differences
 
-The three built-in templates aren't just cosmetically different. They reflect how different investor types actually think about diligence.
+The five built-in templates aren't just cosmetically different. They reflect how different investor types actually think about diligence.
 
-### PE Lower-Middle Market
-
-Heavy on:
-- Quality of earnings (its own category)
-- Gross margin analysis
-- Working capital and balance sheet
-- Revenue sustainability and customer concentration
-
-Lighter on:
-- Product roadmap (assumes proven product)
-- Burn/runway (assumes profitable or close)
-
-### VC Seed / Pre-Seed
+### Venture Capital
 
 Heavy on:
 - Team / founders (separate from management --- founder dynamics matter)
@@ -170,16 +158,51 @@ Lighter on:
 
 ### Growth Equity
 
-Blends both:
+Blends VC and PE perspectives:
 - Full financial categories (revenue, margins, operating leverage)
 - Plus growth metrics (unit economics, CAC/LTV as its own category)
 - Expects more data room completeness than VC but more growth tolerance than PE
+
+### PE Lower-Middle Market
+
+Heavy on:
+- Quality of earnings (its own category)
+- Gross margin analysis
+- Working capital and balance sheet
+- Revenue sustainability and customer concentration
+
+Lighter on:
+- Product roadmap (assumes proven product)
+- Burn/runway (assumes profitable or close)
+
+### PE Middle Market
+
+Everything in PE LMM, plus:
+- Operational complexity (locations, systems, supply chain)
+- Platform / M&A strategy (buy-and-build thesis, integration playbook)
+- Leverage / capital structure (covenants, debt service coverage)
+- Management depth beyond founders (middle management, functional leaders)
+
+Lighter on:
+- Product-market fit (assumes proven at this scale)
+- Burn/runway (assumes established cash flows)
+
+### PE Large Buyout
+
+Institutional-grade diligence:
+- Capital structure and leverage scenarios front and center
+- Regulatory / legal / ESG as a high-weight category (not medium)
+- Platform strategy and integration at scale
+- Operations / infrastructure (ERP, cybersecurity, facilities)
+- Governance and board composition
+
+Heavier on compliance, integration risk, and exit planning than any other template
 
 ---
 
 ## Tips for building your rubric
 
-**Start with a template.** Even if your process is unique, one of the three templates will be close. Customize from there rather than building from scratch.
+**Start with a template.** Even if your process is unique, one of the five templates will be close. Customize from there rather than building from scratch.
 
 **Write questions you'd actually ask.** The rubric questions guide the analysis. If you'd ask a CFO "what are the key QoE adjustments?", put that in your rubric. If you wouldn't ask it, leave it out.
 

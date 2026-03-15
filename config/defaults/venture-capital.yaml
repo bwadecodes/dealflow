@@ -1,5 +1,5 @@
 # Dealflow Diligence Configuration
-# Template: VC Seed / Pre-Seed
+# Template: Venture Capital
 # Focus: Team, market, product-market fit, burn and runway
 version: 1
 
@@ -77,7 +77,7 @@ rubric:
 
 buy_box:
   revenue_range: "Pre-revenue to $5M ARR"
-  stage: "Pre-Seed, Seed"
+  stage: "Pre-Seed, Seed, Series A"
   ownership_target: "10-20%"
   sector_focus:
     - "software"

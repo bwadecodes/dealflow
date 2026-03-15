@@ -5,15 +5,17 @@
 Initial release.
 
 ### Skills
-- `/dd-setup` --- Configuration wizard with PE, VC, and Growth Equity templates
+- `/dd-setup` --- Configuration wizard with five starting templates (VC, Growth Equity, PE LMM, PE MM, PE Large Buyout)
 - `/dd-dataroom` --- Data room assessment against your diligence rubric
 - `/dd-model` --- Financial model review with driver mapping and assumption analysis
 - `/dd-questions` --- Prioritized diligence question generation
 
 ### Config Templates
-- PE Lower-Middle Market
-- VC Seed / Pre-Seed
+- Venture Capital
 - Growth Equity
+- PE Lower-Middle Market
+- PE Middle Market
+- PE Large Buyout
 
 ### Documentation
 - CLI Quickstart for non-technical users

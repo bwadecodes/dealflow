@@ -1,6 +1,6 @@
 ---
 name: dd-setup
-description: Set up your diligence configuration — choose a starting template (PE, VC, or Growth Equity) and customize your rubric, buy box, and preferences. Run this before your first data room review.
+description: Set up your diligence configuration — choose a starting template and customize your rubric, buy box, and preferences. Run this before your first data room review.
 allowed-tools:
   - Read
   - Write
@@ -27,13 +27,15 @@ If it exists, read it and ask: *"You already have a config file. Want to update 
 
 ### Step 1: Choose a starting template
 
-Present the three options:
+Present the five options:
 
 > **Which template fits your investment approach?**
 >
-> 1. **PE Lower-Middle Market** — financials-heavy, quality of earnings emphasis, $5-50M revenue companies
-> 2. **VC Seed / Pre-Seed** — team and market focused, lighter data room expectations, burn and runway emphasis
-> 3. **Growth Equity** — blends PE-style financial rigor with growth-stage metrics (unit economics, CAC/LTV, channel attribution)
+> 1. **Venture Capital** — team and market focused, lighter data room expectations, burn and runway emphasis (pre-revenue to $5M ARR)
+> 2. **Growth Equity** — blends PE-style financial rigor with growth-stage metrics (unit economics, CAC/LTV, channel attribution) ($3M-$30M ARR)
+> 3. **PE Lower-Middle Market** — financials-heavy, quality of earnings emphasis ($10M-$75M revenue)
+> 4. **PE Middle Market** — operational complexity, platform strategy, leverage ($75M-$250M revenue)
+> 5. **PE Large Buyout** — institutional-grade operations, capital structure, regulatory, integration ($250M+ revenue)
 >
 > Pick one as a starting point — you can customize everything in the next steps.
 
@@ -43,9 +45,11 @@ Use `AskUserQuestion` to get the selection.
 
 Based on the selection, read the corresponding default config using `Read`:
 
-- PE: `config/defaults/pe-lower-middle-market.yaml` (relative to the dealflow plugin directory)
-- VC: `config/defaults/vc-seed-preseed.yaml`
-- Growth: `config/defaults/growth-equity.yaml`
+- Venture Capital: `config/defaults/venture-capital.yaml` (relative to the dealflow plugin directory)
+- Growth Equity: `config/defaults/growth-equity.yaml`
+- PE Lower-Middle Market: `config/defaults/pe-lower-middle-market.yaml`
+- PE Middle Market: `config/defaults/pe-middle-market.yaml`
+- PE Large Buyout: `config/defaults/pe-large-buyout.yaml`
 
 Locate the plugin directory by searching for the config files:
 ```

@@ -1,0 +1,23 @@
+I'm building a Claude Code skills package called "dealflow" — AI-powered due diligence tools for PE and VC investors. The approved design spec is in this folder at design-spec.md. Read it fully.
+
+The spec has been through two rounds of review and is ready for implementation. Here's where we left off:
+
+WHAT'S DONE:
+- Full design spec covering 4 skills: /dd-setup, /dd-dataroom, /dd-model, /dd-questions
+- Package architecture decided (modular skills, dd- prefix)
+- 5 default config templates: PE lower-middle-market, PE middle market, PE large buyout, venture capital, growth equity
+- Documentation plan: CLI quickstart for finance people, IT/compliance guide, rubric customization guide
+- Technical decisions: openpyxl dual-open for Excel, inline pip installs, 3-4 subagents max for data room, markdown-only output in v1
+
+WHAT'S NEXT:
+- Use the /superpowers:writing-plans skill to create an implementation plan from the spec
+- Then build it — this should be a GitHub repo at github.com/bwadecodes/dealflow
+- Tone: professional, human, not AI-sounding. Written for finance people, not developers.
+- No references to Showcase Ventures or Tinge anywhere in the repo
+
+KEY CONTEXT:
+- This project lives in: C:\Users\BrianWade\Dropbox\.Dev Projects\dealflow
+- I'm Brian Wade, investor across PE/growth/VC, now at Primario Holdings
+- GitHub: bwadecodes
+- Reference for packaging quality: github.com/garrytan/gstack
+- The spec includes onramp docs for people who have never used a CLI

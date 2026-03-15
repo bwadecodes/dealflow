@@ -49,7 +49,7 @@ Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (Anthropi
 ```
 /dd-setup
 ```
-Choose from three starting templates (PE, VC, or Growth Equity), customize your rubric and buy box, and save your preferences. Every other skill reads this config.
+Choose from five starting templates, customize your rubric and buy box, and save your preferences. Every other skill reads this config.
 
 **2. Assess a data room:**
 ```
@@ -77,7 +77,7 @@ Reports are saved to a `dd-reports/` folder inside your deal directory, dated so
 Builds your diligence config file — your rubric, buy box criteria, and report preferences. Run this once before your first data room review. Update it when your investment criteria change or when you want a different config for a different fund.
 
 **What it does:**
-1. Presents three starting templates (PE, VC, or Growth Equity)
+1. Presents five starting templates (Venture Capital, Growth Equity, PE Lower-Middle Market, PE Middle Market, PE Large Buyout)
 2. Walks through each rubric category — keep as-is, adjust weights, add/remove questions
 3. Configures your buy box criteria (revenue range, stage, ownership target, sector focus)
 4. Sets report preferences (output directory, detail level)
@@ -187,17 +187,17 @@ After output, interactive mode for refinement: *"Add questions about supply chai
 
 The rubric is the backbone of every assessment. It determines what gets prioritized in data room reviews, what the model analysis focuses on, and which questions get generated.
 
-### Three Built-In Templates
+### Five Built-In Templates
 
-| | Private Equity | VC Seed / Pre-Seed | Growth Equity |
-|---|---|---|---|
-| **Rubric emphasis** | Financials, QoE, margins, working capital, overhead | Team, TAM, product-market fit, unit economics | Blends both — financials + growth metrics |
-| **Buy box** | Revenue $25-100M, EBITDA positive | Pre-revenue to $5M, high growth, large market | $5-25M revenue, growth inflection, path to profitability |
-| **Model review focus** | Assumption depth, operating leverage, cash conversion | Burn rate, runway, path to next round, CAC/LTV | Unit economics depth, channel attribution, margin expansion |
-| **Data room expectations** | Full financials, tax returns, legal, customer contracts | Lighter — pitch deck, cap table, basic financials, IP | Full room expected but tolerance for gaps in early-stage areas |
-| **Question style** | QoE-oriented, accounting detail, contract review | Market validation, team capability, product roadmap | Financial rigor + growth thesis validation |
+| Template | Revenue Range | Rubric Emphasis |
+|----------|--------------|-----------------|
+| **Venture Capital** | Pre-revenue – $5M ARR | Team, TAM, product-market fit, burn and runway |
+| **Growth Equity** | $3M – $30M ARR | Unit economics, CAC/LTV, growth + path to profitability |
+| **PE Lower-Middle Market** | $10M – $75M revenue | Financials, QoE, margins, working capital |
+| **PE Middle Market** | $75M – $250M revenue | Operational complexity, platform strategy, leverage |
+| **PE Large Buyout** | $250M+ revenue | Capital structure, integration, regulatory, institutional ops |
 
-The templates aren't cosmetically different — they reflect how different types of investors actually think about diligence. PE weights quality of earnings; VC weights founder dynamics; Growth Equity blends both with a unit economics lens.
+The templates aren't cosmetically different — they reflect how different types of investors actually think about diligence. VC weights founder dynamics and market; Growth Equity blends financial rigor with growth metrics; PE templates scale from earnings quality at the lower end to capital structure and platform strategy at the upper end.
 
 ### Config Structure
 
@@ -214,7 +214,7 @@ rubric:
         - "Are growth trends sustainable?"
 
 buy_box:
-  revenue_range: "$5M - $50M"
+  revenue_range: "$10M - $75M"
   stage: "Series A, B, Growth"
   ownership_target: "20-40%"
   sector_focus: ["consumer", "technology", "healthcare"]

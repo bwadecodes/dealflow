@@ -61,13 +61,15 @@ Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (Anthropi
 
 Run `/dd-setup` to configure your diligence preferences. It walks you through choosing a starting template and customizing your rubric, buy box, and report preferences.
 
-Three built-in templates:
+Five built-in templates:
 
 | Template | Focus | Typical Deals |
 |----------|-------|---------------|
-| **PE Lower-Middle Market** | Financials, quality of earnings, margins, working capital | $5-50M revenue, control deals, established businesses |
-| **VC Seed / Pre-Seed** | Team, TAM, product-market fit, burn and runway | Pre-revenue to $5M, minority stakes, early-stage |
-| **Growth Equity** | Blends both --- financials + growth metrics, unit economics | $5-25M revenue, growth inflection, path to profitability |
+| **Venture Capital** | Team, TAM, product-market fit, burn and runway | Pre-revenue to $5M ARR, minority stakes, early-stage |
+| **Growth Equity** | Blends financial rigor with growth metrics, unit economics | $3M-$30M ARR, growth inflection, path to profitability |
+| **PE Lower-Middle Market** | Financials, quality of earnings, margins, working capital | $10M-$75M revenue, control deals, established businesses |
+| **PE Middle Market** | Operational complexity, platform strategy, leverage | $75M-$250M revenue, scaled businesses, buy-and-build |
+| **PE Large Buyout** | Capital structure, integration, regulatory, institutional ops | $250M+ revenue, institutional-grade, platform investments |
 
 Pick the closest fit. You can customize every question, weight, and buy box criterion.
 
@@ -106,13 +108,17 @@ The rubric is the backbone of every assessment. It determines what gets prioriti
 
 ## Default Configs
 
-The three built-in templates are designed to reflect how different types of investors actually think about diligence:
+The five built-in templates are designed to reflect how different types of investors actually think about diligence:
+
+- **Venture Capital** weights team, market, and product-market fit. Expects a lighter data room --- pitch deck, cap table, basic financials. Questions focus on market validation, team capability, and product roadmap.
+
+- **Growth Equity** blends financial rigor with growth-stage metrics --- unit economics depth, channel attribution, margin expansion trajectory. Questions validate both the financial story and the growth thesis.
 
 - **PE Lower-Middle Market** weights financials and quality of earnings heavily. Expects a full data room with tax returns, customer contracts, and QoE-ready materials. Questions are oriented toward accounting detail and contract review.
 
-- **VC Seed / Pre-Seed** weights team, market, and product-market fit. Expects a lighter data room --- pitch deck, cap table, basic financials. Questions focus on market validation, team capability, and product roadmap.
+- **PE Middle Market** adds operational complexity, platform strategy, and leverage. Expects institutional-quality data rooms with management presentations, integration plans, and detailed segment reporting. Questions cover M&A track record, systems infrastructure, and capital structure.
 
-- **Growth Equity** blends both. Expects financial rigor but adds growth-stage metrics --- unit economics depth, channel attribution, margin expansion trajectory. Questions validate both the financial story and the growth thesis.
+- **PE Large Buyout** is built for institutional-scale deals. Full regulatory, ESG, and compliance categories alongside capital structure and integration planning. Questions address leverage scenarios, platform synergies, and governance at scale.
 
 The templates are starting points. Every investor's process is different --- customize them to match yours.
 

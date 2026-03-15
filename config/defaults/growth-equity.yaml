@@ -85,7 +85,7 @@ rubric:
         - "Regulatory risks?"
 
 buy_box:
-  revenue_range: "$5M - $25M"
+  revenue_range: "$3M - $30M ARR"
   stage: "Series A, Series B, Growth"
   ownership_target: "15-30%"
   sector_focus:
