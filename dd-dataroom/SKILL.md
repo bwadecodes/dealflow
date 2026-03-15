@@ -188,7 +188,13 @@ Each subagent should:
    - **Information quality** — is the data detailed enough to form a view? What's missing?
    - **Cross-references** — where documents support or contradict each other
 
-3. **Flag documents for follow-up.** While reading, tag any document that:
+3. **Track coverage.** For each assigned document, record whether it was:
+   - **Fully read** — content was extracted and analyzed
+   - **Metadata only** — assessed from filename/folder location but not opened (low-priority category or large room triage)
+   - **Skipped** — unsupported format, password-protected, or corrupted
+   Include the reason for any document not fully read. This data feeds the Coverage Summary in the final report.
+
+4. **Flag documents for follow-up.** While reading, tag any document that:
    - Contains data that contradicts other documents or the deal narrative
    - Is incomplete, outdated, or appears to be a draft
    - Raises a question that needs to be asked of the company
@@ -196,7 +202,7 @@ Each subagent should:
    - Is password-protected or partially unreadable
    For each flagged document, record: filename, flag type (Review / Incomplete / Verify / Question), and a one-line reason.
 
-3. **Handle errors gracefully:**
+5. **Handle errors gracefully:**
    - Password-protected files: *"[filename] is password-protected — skipping. Remove the password and re-run to include it."*
    - Unsupported file types: *"Skipping [filename] — file type not supported."*
    - Corrupted files: *"Could not read [filename] — file may be corrupted."*
@@ -306,6 +312,27 @@ Flag types:
 - **🟡 Question** — raises a specific question to ask the company
 
 If no documents need flagging, omit this section.
+
+---
+
+## Coverage Summary
+
+**Documents fully read:** X of Y
+**Documents assessed from metadata only:** Z of Y
+
+| Category | Total Files | Fully Read | Metadata Only | Skipped (unsupported) |
+|----------|------------|------------|---------------|----------------------|
+| Financials | 12 | 12 | 0 | 0 |
+| Legal | 8 | 6 | 2 | 0 |
+| Product / Operations | 5 | 5 | 0 | 0 |
+| ... | ... | ... | ... | ... |
+
+**Metadata-only documents** (not read in full — assessed from filename and folder location):
+- [filename] — [category] — [reason: low-priority / large room triage / unsupported format]
+- [filename] — [category] — [reason]
+
+If all documents were fully read, replace this section with: *"All [Y] documents in the room were read in full."*
+```
 
 ---
 
