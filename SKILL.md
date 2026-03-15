@@ -141,7 +141,7 @@ Dealflow currently focuses on diligence --- the highest-value, most-frequent wor
 
 Built by [Brian Wade](https://github.com/bwadecodes). Background across PE, growth equity, and VC --- now investing independently out of Primario Holdings.
 
-This started as a set of personal tools for running diligence faster without sacrificing depth. If you find it useful or have ideas for what would make it better, [open an issue](https://github.com/bwadecodes/dealflow/issues).
+This started as a set of personal tools for running diligence faster without sacrificing depth. If you find a bug, have an idea, or just want to say "this didn't work on my deal" --- [open an issue](https://github.com/bwadecodes/dealflow/issues). Your AI agent can do it too.
 
 ## License
 

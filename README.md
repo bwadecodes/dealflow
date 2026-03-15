@@ -288,7 +288,7 @@ Built by [Brian Wade](https://github.com/bwadecodes). Background across [PE, gro
 
 This started as a set of personal tools for running diligence faster without sacrificing depth. The goal is simple: spend less time on the mechanical parts of diligence so you can spend more time on the judgment calls that actually matter.
 
-If you find it useful or have ideas for what would make it better, [open an issue](https://github.com/bwadecodes/dealflow/issues).
+If you find a bug, have an idea, or just want to say "this didn't work on my deal" — [open an issue](https://github.com/bwadecodes/dealflow/issues). Your AI agent can do it too.
 
 ## License
 

@@ -142,6 +142,7 @@ Reports are saved in a `dd-reports` folder inside your deal directory.
 
 ## Tips
 
+- **Allow permissions for Dealflow skills.** Claude Code asks for permission each time a skill reads a file or runs a command. For Dealflow, this means dozens of prompts during a single data room scan. To avoid this, run Claude Code with `claude --dangerously-skip-permissions` or type `/permissions` inside a session to auto-allow the tools Dealflow uses (Read, Write, Bash, Glob, Grep). Only do this if you're comfortable with Claude Code accessing files in your deal folder.
 - **You don't need to memorize commands.** Type `/dd-` and Claude Code will show you the available skills.
 - **You can ask follow-up questions.** After any report is generated, just type your question in the same session --- "dig deeper into the financials," "compare the P&L across years," etc.
 - **Reports don't overwrite each other.** Each run is dated, so you can re-run as new documents come in.
