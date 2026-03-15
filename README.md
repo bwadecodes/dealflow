@@ -24,7 +24,7 @@ Investors who want to move faster through diligence without sacrificing depth. Y
 
 If you've never touched a command line, that's fine — the [CLI Quickstart](docs/cli-quickstart.md) covers everything you need in about 5 minutes.
 
-If you need IT or compliance approval before installing, the [IT & Compliance Guide](docs/it-compliance-guide.md) has a one-page summary of how the tool works, where your data goes, and a template email you can forward to your IT team.
+If you need IT or compliance approval before installing, the [IT & Compliance Guide](docs/it-compliance-guide.md) has a one-page summary of how the tool works, where your data goes, and a template email you can forward to your IT team. If you need budget approval, the [Cost Guide for the CFO](docs/cfo-cost-guide.md) breaks down what it costs per document, per deal, and per year — with a template email for finance.
 
 ---
 
@@ -254,6 +254,7 @@ You can maintain different configs for different contexts and pass them per invo
 |-------|----------|----------------|
 | [CLI Quickstart](docs/cli-quickstart.md) | Investors new to the command line | Opening a terminal, navigating folders, installing Claude Code, running your first command |
 | [IT & Compliance Guide](docs/it-compliance-guide.md) | IT teams, compliance officers | Data flow, subscription tiers, security references, template approval email |
+| [Cost Guide for the CFO](docs/cfo-cost-guide.md) | CFOs, finance teams | Token costs per document type, per-deal cost estimates, annual budget scenarios, template approval email |
 | [Rubric Customization Guide](docs/rubric-guide.md) | All users | Adding/removing categories, adjusting weights, writing effective questions, maintaining multiple configs |
 
 ---
