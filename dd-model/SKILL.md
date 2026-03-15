@@ -23,6 +23,16 @@ Read a financial model and produce a business-intelligence-focused review — un
 
 The optional context string helps frame the analysis — e.g., "B2B SaaS, Series A at $40M pre, net revenue retention 120%."
 
+## Report Requirements (Non-Negotiable)
+
+These rules apply to every report. Check each one before saving. A report missing any of these is non-compliant.
+
+1. **Header:** `# [DEAL_NAME] — Financial Model Review — YYYY-MM-DD HH:MM`. Never use generic headers like "Financial Model Review: [Deal Name]".
+2. **Run Metadata block:** Every report includes the `## Run Metadata` table immediately after the header — time initiated, duration, model, input tokens, output tokens, estimated cost. If token counts are unavailable (agent cannot introspect usage), write "See session stats" for those fields. Time, duration, and model name are always available — never skip them.
+3. **HTML export:** Default to producing **both** `.md` and `.html` files. Only produce one format if the config explicitly sets `report_format` to `"markdown"` or `"html"`. If the config field is missing or empty, default to `"both"`.
+4. **Shared template:** HTML reports use the template at `config/report-template.html` in the dealflow plugin directory. All `/dd-*` skills use the same template.
+5. **Presentability:** These reports get shared with senior investment professionals. Professional formatting matters.
+
 ## Prerequisites
 
 ### 1. Load the config
@@ -190,7 +200,7 @@ Save using `Write` to:
 | Output tokens | [count] |
 | Estimated cost | $X.XX |
 
-Compute duration as `current_time - START_TIME`. For tokens and cost, use the cumulative totals from all API calls during this skill execution. Estimate cost using the rates in `docs/cfo-cost-guide.md`.
+Compute duration as `current_time - START_TIME`. For tokens and cost, use the cumulative totals from all API calls during this skill execution. Estimate cost using the rates in `docs/cfo-cost-guide.md`. **If you cannot access token counts, write "See session stats" for token and cost fields — but always fill in time initiated, duration, and model name.**
 
 ---
 
@@ -258,8 +268,9 @@ Check the config's `preferences.report_format` value:
 - `"markdown"` — save only the `.md` file (above)
 - `"html"` — save only an `.html` file
 - `"both"` — save both `.md` and `.html`
+- **If the field is missing, empty, or not set → default to `"both"`.**
 
-If HTML is requested, generate a styled HTML report:
+Generate the styled HTML report:
 
 1. Read the HTML template from the dealflow plugin directory:
    ```

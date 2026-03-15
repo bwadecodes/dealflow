@@ -24,6 +24,17 @@ Read a deal's data room and produce a structured diligence assessment against yo
 
 The optional context string helps tailor the analysis — e.g., "B2B SaaS, ~$8M ARR, Series A, 200 enterprise customers."
 
+## Report Requirements (Non-Negotiable)
+
+These rules apply to every report. Check each one before saving. A report missing any of these is non-compliant.
+
+1. **Header:** `# [DEAL_NAME] — Data Room Assessment — YYYY-MM-DD HH:MM`. Never use generic headers like "Data Room Assessment: [Deal Name]".
+2. **Run Metadata block:** Every report includes the `## Run Metadata` table immediately after the header — time initiated, duration, model, input tokens, output tokens, estimated cost. If token counts are unavailable (agent cannot introspect usage), write "See session stats" for those fields. Time, duration, and model name are always available — never skip them.
+3. **HTML export:** Default to producing **both** `.md` and `.html` files. Only produce one format if the config explicitly sets `report_format` to `"markdown"` or `"html"`. If the config field is missing or empty, default to `"both"`.
+4. **Flagged documents:** The report must include a `## Documents Flagged for Follow-Up` table. Every subagent must flag documents during its read pass (see Phase 2, step 4). If no documents need flagging, include the section header with "No documents flagged."
+5. **Shared template:** HTML reports use the template at `config/report-template.html` in the dealflow plugin directory. All `/dd-*` skills use the same template.
+6. **Presentability:** These reports get shared with senior investment professionals. Professional formatting matters.
+
 ## Prerequisites
 
 ### 1. Load the config
@@ -145,6 +156,7 @@ Each subagent receives:
 - The file list for those categories (from Phase 1 manifest)
 - The deal context string (if provided)
 - The buy box criteria
+- **Explicit instruction to flag documents for follow-up** (see step 4 below — this is required, not optional)
 
 Each subagent should:
 
@@ -262,7 +274,7 @@ Use today's date. If a report with the same date exists, append a sequence numbe
 | Output tokens | [count] |
 | Estimated cost | $X.XX |
 
-Compute duration as `current_time - START_TIME`. For tokens and cost, use the cumulative totals from all API calls during this skill execution (including subagent calls). Estimate cost using the rates in `docs/cfo-cost-guide.md`.
+Compute duration as `current_time - START_TIME`. For tokens and cost, use the cumulative totals from all API calls during this skill execution (including subagent calls). Estimate cost using the rates in `docs/cfo-cost-guide.md`. **If you cannot access token counts, write "See session stats" for token and cost fields — but always fill in time initiated, duration, and model name.**
 
 ---
 
@@ -383,8 +395,9 @@ Check the config's `preferences.report_format` value:
 - `"markdown"` — save only the `.md` file (above)
 - `"html"` — save only an `.html` file
 - `"both"` — save both `.md` and `.html`
+- **If the field is missing, empty, or not set → default to `"both"`.**
 
-If HTML is requested, generate a styled HTML report:
+Generate the styled HTML report:
 
 1. Read the HTML template from the dealflow plugin directory:
    ```
