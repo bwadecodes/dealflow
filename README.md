@@ -107,6 +107,7 @@ Reads a deal's data room folder and produces a structured diligence assessment a
 - **Executive summary** — 1-page overview, overall confidence level, top 3 strengths, top 3 concerns
 - **Buy box fit** — how the deal maps to your criteria, with specific callouts on fit and misfit
 - **Category assessments** — one section per rubric category with findings, flags, and evidence
+- **Coverage summary** — exactly which documents were fully read vs. assessed from metadata only, broken down by category, so you can verify nothing important was skipped
 - **Gap list** — missing documents and information, prioritized
 - **Recommended next steps** — what to dig into further
 
@@ -242,7 +243,7 @@ You can maintain different configs for different contexts and pass them per invo
 
 **File reading:** PDFs via [pymupdf](https://pymupdf.readthedocs.io/), Excel via [openpyxl](https://openpyxl.readthedocs.io/) (dual-open: formulas + cached values), Word via [python-docx](https://python-docx.readthedocs.io/). CSV and images read directly. Python dependencies install automatically on first run.
 
-**Context management:** Large data rooms (hundreds of files) are triaged — Phase 1 reads filenames only, Phase 2 reads selectively based on rubric priority. The data room skill uses parallel subagents (3-4) to split the work across rubric categories, each with its own context window. If subagent dispatch fails, it falls back to sequential processing.
+**Context management:** Not every document is read cover-to-cover. Phase 1 scans filenames and folder structure to categorize and prioritize documents by rubric weight (high → medium → low). Phase 2 reads documents in priority order using parallel subagents (3-4), each handling a slice of rubric categories with its own context window. In a typical 200-document room, ~80% of files are fully read; the rest are low-priority items assessed from filename and folder location only. Every report includes a **Coverage Summary** listing exactly which documents were fully read and which were not, so you can verify nothing material was missed. If subagent dispatch fails, it falls back to sequential processing.
 
 **Reports:** All output is markdown, saved to `{deal-folder}/dd-reports/` with date stamps. Reports from different runs don't overwrite each other. v1 is markdown-only; DOCX export is planned.
 

@@ -129,6 +129,31 @@ Add 3–5 follow-up questions in interactive mode: +$0.50–$1.50.
 
 ---
 
+## How Document Prioritization Works
+
+The data room skill does not read every document cover-to-cover. Here's exactly how it decides what to read and in what order.
+
+**Phase 1 — Inventory (filenames only, no document content read):**
+1. Scans the full folder tree and categorizes each file by type (Financials, Legal, Product, Team, Customer, etc.) based on its filename and folder location
+2. Maps each document category to rubric categories — these are the evaluation criteria you configured during setup (e.g., Revenue Quality, Gross Margin, Quality of Earnings)
+3. Each rubric category has a weight: **high**, **medium**, or **low**. Documents supporting high-weight categories are read first
+4. Identifies gaps — rubric categories with no supporting documents in the room
+
+**Checkpoint — you choose what to focus on:**
+After Phase 1, the tool pauses and presents the inventory. You can accept the default prioritization, narrow the scope ("focus on financials and legal only"), or request a full read of everything.
+
+**Phase 2 — Assessment (documents are read):**
+1. 3–4 parallel agents each handle a slice of rubric categories (e.g., Agent 1 handles Financials, Agent 2 handles Legal)
+2. Each agent reads all documents assigned to its categories in priority order
+3. High-weight category documents are always read. Medium-weight documents are read next. Low-weight documents may be assessed from filenames only if the room is very large (200+ files)
+4. After all agents finish, results are cross-referenced for contradictions and corroboration
+
+**What this means for cost:** In a typical 200-document room, roughly 80% of documents are fully read. The remaining 20% are low-priority files (routine certificates, duplicate templates, supporting images) that are cataloged but not deeply analyzed. This selective approach saves ~20% on input token costs without sacrificing coverage on material documents.
+
+**What to watch for:** The triage is based on filenames, not content. A mislabeled file (e.g., critical financial data in a file named "misc-notes.pdf") could be deprioritized. Every report includes a **Coverage Summary** that lists exactly which documents were fully read and which were assessed from metadata only, broken down by category — so you can verify nothing important was missed.
+
+---
+
 ## Annual Budget Scenarios
 
 | Scenario | Deals / Year | Cost per Deal | Annual API Cost |
