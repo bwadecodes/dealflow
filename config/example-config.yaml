@@ -104,7 +104,9 @@ buy_box:
 # Controls how reports are generated and saved.
 
 preferences:
-  output_dir: "dd-reports"        # relative to the deal folder
-  report_format: "markdown"       # markdown only in v1 (docx planned for v2)
+  output_dir: "dd-reports"        # relative to the deal folder, or an absolute path
+  report_format: "markdown"       # "markdown", "html", or "both"
+                                  # html produces a styled, professional report suitable
+                                  # for printing or sharing with senior stakeholders
   detail_level: "deep"            # "executive" for shorter reports, "deep" for full analysis
   auto_save: true                 # save reports automatically (vs. asking first)

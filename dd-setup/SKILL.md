@@ -82,8 +82,9 @@ Show the buy box section and ask the user to confirm or customize:
 Show preferences and confirm:
 
 > **Report preferences:**
-> - Output directory: `dd-reports` (relative to deal folder)
-> - Detail level: deep (full analysis) or executive (shorter)
+> - Output directory: `dd-reports` (relative to deal folder, or an absolute path like `~/Dropbox/Reports`)
+> - Report format: `both` (saves markdown + styled HTML for sharing), `markdown`, or `html`
+> - Detail level: `deep` (full analysis) or `executive` (shorter)
 > - Auto-save reports: yes
 >
 > *Any changes?*

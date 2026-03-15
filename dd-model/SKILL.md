@@ -58,6 +58,16 @@ If the file is password-protected: *"This file is password-protected. Remove the
 
 If the file is not `.xlsx`: *"This skill works with .xlsx files. If your model is in Google Sheets, download it as .xlsx first."*
 
+## Deal Identification
+
+Before starting the review, determine the **deal/company name**:
+
+1. If the user provided a deal context string, extract the company name from it
+2. Otherwise, use the parent folder name of the model file
+3. If the folder name is generic (e.g., "models", "files"), use `AskUserQuestion` to ask: *"What's the company/deal name for this review?"*
+
+Store this as `DEAL_NAME` — it will be used in the report header.
+
 ## Phase 1: Model Comprehension
 
 Open the workbook **twice** — this is critical:
@@ -139,22 +149,26 @@ The business intelligence layer — this is where the review earns its value:
 
 ## Phase 4: Report Output
 
-Create the output directory:
+### Determine output directory
+
+Read the config's `preferences.output_dir` value. If set, use it (it can be a relative path from the deal folder, or an absolute path). If not set, default to `dd-reports`.
+
+Determine the deal folder — use the parent directory of the model file's location.
+
 ```bash
-mkdir -p "<deal-folder>/dd-reports"
+mkdir -p "<output-dir>"
 ```
 
-Determine the deal folder — use the parent directory of the model file's location. Save using `Write` to:
+Save using `Write` to:
 ```
-<deal-folder>/dd-reports/model-review-YYYY-MM-DD.md
+<output-dir>/model-review-YYYY-MM-DD.md
 ```
 
 ### Report structure
 
 ```markdown
-# Financial Model Review: [Deal Name / File Name]
+# [DEAL_NAME] — Financial Model Review — YYYY-MM-DD HH:MM
 
-**Date:** YYYY-MM-DD
 **Model file:** [filename]
 **Sheets:** [count]
 **Config template:** [PE / VC / Growth Equity / Custom]
@@ -217,6 +231,37 @@ Prioritized list of what needs validation in diligence:
 3. **[Important]** [Assumption] — [why it matters, what to ask]
 ...
 ```
+
+### HTML export
+
+Check the config's `preferences.report_format` value:
+
+- `"markdown"` — save only the `.md` file (above)
+- `"html"` — save only an `.html` file
+- `"both"` — save both `.md` and `.html`
+
+If HTML is requested, generate a styled HTML report:
+
+1. Read the HTML template from the dealflow plugin directory:
+   ```
+   Glob **/dealflow/config/report-template.html
+   ```
+2. Convert the markdown report content to HTML elements:
+   - `#` headings → `<h1>`, `<h2>`, `<h3>`
+   - Tables → `<table>` with `<thead>` and `<tbody>`
+   - Lists → `<ul>` / `<ol>`
+   - Flag emojis → styled spans: 🟢 → `<span class="flag-green">●</span>`, 🟡 → `<span class="flag-yellow">●</span>`, 🔴 → `<span class="flag-red">●</span>`
+   - Business Model Summary → wrap in `<div class="exec-summary">`
+3. Replace the template placeholders:
+   - `{{COMPANY_NAME}}` → DEAL_NAME
+   - `{{REPORT_TYPE}}` → "Financial Model Review"
+   - `{{DATETIME}}` → YYYY-MM-DD HH:MM
+   - `{{DOC_COUNT}}` → "[X] sheets"
+   - `{{CONFIG_TEMPLATE}}` → template name
+   - `{{CONFIDENCE}}` → omit or leave blank
+   - `{{REPORT_BODY}}` → converted HTML content
+   - `{{REPORT_TITLE}}` → "DEAL_NAME — Financial Model Review"
+4. Save to: `<output-dir>/model-review-YYYY-MM-DD.html`
 
 ## Interactive Mode
 

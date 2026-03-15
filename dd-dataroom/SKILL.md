@@ -59,6 +59,16 @@ Glob <path>/**/*
 
 If empty: *"This folder appears to be empty. Double-check the path and try again."*
 
+## Deal Identification
+
+Before starting the assessment, determine the **deal/company name**:
+
+1. If the user provided a deal context string, extract the company name from it
+2. Otherwise, use the deal folder name (the last directory in the path)
+3. If the folder name is generic (e.g., "dataroom", "docs"), use `AskUserQuestion` to ask: *"What's the company/deal name for this assessment?"*
+
+Store this as `DEAL_NAME` — it will be used in all report headers.
+
 ## Phase 1: Inventory & Triage
 
 Scan the folder tree. Read **filenames and folder structure only** — do not open files yet.
@@ -178,6 +188,14 @@ Each subagent should:
    - **Information quality** — is the data detailed enough to form a view? What's missing?
    - **Cross-references** — where documents support or contradict each other
 
+3. **Flag documents for follow-up.** While reading, tag any document that:
+   - Contains data that contradicts other documents or the deal narrative
+   - Is incomplete, outdated, or appears to be a draft
+   - Raises a question that needs to be asked of the company
+   - Contains data that needs independent verification (e.g., customer claims, market sizing)
+   - Is password-protected or partially unreadable
+   For each flagged document, record: filename, flag type (Review / Incomplete / Verify / Question), and a one-line reason.
+
 3. **Handle errors gracefully:**
    - Password-protected files: *"[filename] is password-protected — skipping. Remove the password and re-run to include it."*
    - Unsupported file types: *"Skipping [filename] — file type not supported."*
@@ -196,14 +214,19 @@ After all subagents return, the main agent synthesizes:
 
 ## Phase 3: Report Output
 
-Create the output directory:
+### Determine output directory
+
+Read the config's `preferences.output_dir` value. If set, use it (it can be a relative path from the deal folder, or an absolute path). If not set, default to `dd-reports`.
+
 ```bash
-mkdir -p "<deal-folder>/dd-reports"
+mkdir -p "<output-dir>"
 ```
 
-Save the report using `Write` to:
+### Save the report
+
+Save the markdown report using `Write` to:
 ```
-<deal-folder>/dd-reports/dataroom-assessment-YYYY-MM-DD.md
+<output-dir>/dataroom-assessment-YYYY-MM-DD.md
 ```
 
 Use today's date. If a report with the same date exists, append a sequence number: `dataroom-assessment-2026-03-13-2.md`.
@@ -211,9 +234,8 @@ Use today's date. If a report with the same date exists, append a sequence numbe
 ### Report structure
 
 ```markdown
-# Data Room Assessment: [Deal Name]
+# [DEAL_NAME] — Data Room Assessment — YYYY-MM-DD HH:MM
 
-**Date:** YYYY-MM-DD
 **Documents reviewed:** X of Y files in room
 **Config template:** [PE / VC / Growth Equity / Custom]
 
@@ -251,7 +273,7 @@ Use today's date. If a report with the same date exists, append a sequence numbe
 
 ## Category Assessments
 
-### [Category Name] (Weight: [high/medium/low])
+### [Category Name] — Weight: [high/medium/low]
 
 **Findings:**
 - [Finding with document reference]
@@ -265,6 +287,25 @@ Use today's date. If a report with the same date exists, append a sequence numbe
 **Information quality:** [Assessment of data completeness]
 
 [Repeat for each rubric category]
+
+---
+
+## Documents Flagged for Follow-Up
+
+| # | Document | Flag | Reason |
+|---|----------|------|--------|
+| 1 | [filename] | 🔴 Review | [one-line reason — e.g., "Revenue figures inconsistent with CIM"] |
+| 2 | [filename] | 🟡 Incomplete | [one-line reason — e.g., "Missing inventor assignment for 2 patents"] |
+| 3 | [filename] | 🟡 Verify | [one-line reason — e.g., "Top 3 customers = 72% of revenue — verify retention"] |
+| 4 | [filename] | 🟡 Question | [one-line reason — e.g., "Unusual $500K adjustment in Q2 — ask CFO"] |
+
+Flag types:
+- **🔴 Review** — contains contradictions, errors, or red flags that need careful re-examination
+- **🟡 Incomplete** — document is a draft, outdated, or missing key information
+- **🟡 Verify** — data needs independent verification or corroboration
+- **🟡 Question** — raises a specific question to ask the company
+
+If no documents need flagging, omit this section.
 
 ---
 
@@ -288,6 +329,42 @@ Use today's date. If a report with the same date exists, append a sequence numbe
 2. [Specific action]
 3. [Specific action]
 ```
+
+### HTML export
+
+Check the config's `preferences.report_format` value:
+
+- `"markdown"` — save only the `.md` file (above)
+- `"html"` — save only an `.html` file
+- `"both"` — save both `.md` and `.html`
+
+If HTML is requested, generate a styled HTML report:
+
+1. Read the HTML template from the dealflow plugin directory:
+   ```
+   Glob **/dealflow/config/report-template.html
+   ```
+2. Convert the markdown report content to HTML elements:
+   - `#` headings → `<h1>`, `<h2>`, `<h3>`
+   - Tables → `<table>` with `<thead>` and `<tbody>`
+   - Lists → `<ul>` / `<ol>`
+   - Flag emojis → styled spans: 🟢 → `<span class="flag-green">●</span>`, 🟡 → `<span class="flag-yellow">●</span>`, 🔴 → `<span class="flag-red">●</span>`
+   - Executive Summary → wrap in `<div class="exec-summary">`
+   - Top 3 strengths + Top 3 concerns → wrap in `<div class="strengths-concerns">` with child `<div class="strengths">` and `<div class="concerns">`
+   - Documents Flagged for Follow-Up → wrap table in `<div class="flagged-docs">`
+   - Gap list checkboxes → `<ul class="gap-list">` with priority classes
+3. Replace the template placeholders:
+   - `{{COMPANY_NAME}}` → DEAL_NAME
+   - `{{REPORT_TYPE}}` → "Data Room Assessment"
+   - `{{DATETIME}}` → YYYY-MM-DD HH:MM
+   - `{{DOC_COUNT}}` → "X of Y files"
+   - `{{CONFIG_TEMPLATE}}` → template name
+   - `{{CONFIDENCE}}` → High / Medium / Low
+   - `{{REPORT_BODY}}` → converted HTML content (everything below the header)
+   - `{{REPORT_TITLE}}` → "DEAL_NAME — Data Room Assessment"
+4. Save to: `<output-dir>/dataroom-assessment-YYYY-MM-DD.html`
+
+The HTML file can be opened in any browser and printed to PDF for sharing with senior stakeholders.
 
 ## Phase 4: Interactive Mode
 

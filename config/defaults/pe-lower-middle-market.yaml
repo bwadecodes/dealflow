@@ -102,6 +102,6 @@ buy_box:
 
 preferences:
   output_dir: "dd-reports"
-  report_format: "markdown"
+  report_format: "both"
   detail_level: "deep"
   auto_save: true

@@ -99,24 +99,34 @@ A question goes in the category that best fits the person who would answer it �
 
 Every question includes the **"why"** — what finding or gap triggered it. This is critical. Anyone reading the list should understand the reasoning behind each question, not just the ask.
 
+## Deal Identification
+
+Before generating questions, determine the **deal/company name**:
+
+1. If prior reports exist in `dd-reports/`, extract DEAL_NAME from the report headers
+2. Otherwise, use the deal folder name
+3. If the folder name is generic, use `AskUserQuestion` to ask: *"What's the company/deal name?"*
+
 ## Report Output
 
-Create the output directory if needed:
+### Determine output directory
+
+Read the config's `preferences.output_dir` value. If set, use it (it can be a relative path from the deal folder, or an absolute path). If not set, default to `dd-reports`.
+
 ```bash
-mkdir -p "<deal-folder>/dd-reports"
+mkdir -p "<output-dir>"
 ```
 
 Save using `Write` to:
 ```
-<deal-folder>/dd-reports/diligence-questions-YYYY-MM-DD.md
+<output-dir>/diligence-questions-YYYY-MM-DD.md
 ```
 
 ### Report structure
 
 ```markdown
-# Diligence Questions: [Deal Name]
+# [DEAL_NAME] — Diligence Questions — YYYY-MM-DD HH:MM
 
-**Date:** YYYY-MM-DD
 **Sources:** [list which reports were used, or "rubric + direct folder scan"]
 **Config template:** [PE / VC / Growth Equity / Custom]
 **Total questions:** [count] ([X] critical, [Y] important, [Z] nice to have)
@@ -150,6 +160,36 @@ Save using `Write` to:
 **Critical items ([count]):** [one-line summary of the themes]
 **Key areas to focus management conversations on:** [2-3 bullets]
 ```
+
+### HTML export
+
+Check the config's `preferences.report_format` value:
+
+- `"markdown"` — save only the `.md` file (above)
+- `"html"` — save only an `.html` file
+- `"both"` — save both `.md` and `.html`
+
+If HTML is requested, generate a styled HTML report:
+
+1. Read the HTML template from the dealflow plugin directory:
+   ```
+   Glob **/dealflow/config/report-template.html
+   ```
+2. Convert the markdown report content to HTML elements:
+   - `#` headings → `<h1>`, `<h2>`, `<h3>`
+   - Numbered questions → `<ol>` with priority styling
+   - Priority tags → bold colored spans: `[Critical]` → red, `[Important]` → amber, `[Nice to have]` → gray
+   - Summary section → wrap in `<div class="exec-summary">`
+3. Replace the template placeholders:
+   - `{{COMPANY_NAME}}` → DEAL_NAME
+   - `{{REPORT_TYPE}}` → "Diligence Questions"
+   - `{{DATETIME}}` → YYYY-MM-DD HH:MM
+   - `{{DOC_COUNT}}` → "[X] questions"
+   - `{{CONFIG_TEMPLATE}}` → template name
+   - `{{CONFIDENCE}}` → omit or leave blank
+   - `{{REPORT_BODY}}` → converted HTML content
+   - `{{REPORT_TITLE}}` → "DEAL_NAME — Diligence Questions"
+4. Save to: `<output-dir>/diligence-questions-YYYY-MM-DD.html`
 
 ### Formatting rules
 

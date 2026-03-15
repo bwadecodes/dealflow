@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{REPORT_TITLE}}</title>
+<style>
+  @page {
+    margin: 0.75in 1in;
+    size: letter;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1a1a2e;
+    line-height: 1.6;
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 2rem 2.5rem;
+    background: #fff;
+    font-size: 14px;
+  }
+
+  /* Header */
+  .report-header {
+    border-bottom: 3px solid #1a1a2e;
+    padding-bottom: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  .report-header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+  .report-header .subtitle {
+    font-size: 1rem;
+    color: #555;
+    font-weight: 400;
+  }
+  .report-meta {
+    display: flex;
+    gap: 2rem;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: #666;
+  }
+  .report-meta span { white-space: nowrap; }
+
+  /* Sections */
+  h2 {
+    font-weight: 700;
+    color: #1a1a2e;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.95rem;
+  }
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #2d2d44;
+  }
+  p { margin-bottom: 0.75rem; }
+  ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+  li { margin-bottom: 0.35rem; }
+
+  /* Executive Summary Box */
+  .exec-summary {
+    background: #f7f8fb;
+    border-left: 4px solid #1a1a2e;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .exec-summary p:last-child { margin-bottom: 0; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.9rem;
+  }
+  thead th {
+    background: #1a1a2e;
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  tbody td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid #e8e8ee;
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafbfd; }
+  tbody tr:hover { background: #f0f1f5; }
+
+  /* Flags */
+  .flag-green { color: #1b8a4e; font-weight: 600; }
+  .flag-yellow { color: #c08800; font-weight: 600; }
+  .flag-red { color: #c0392b; font-weight: 600; }
+
+  /* Strengths / Concerns side-by-side */
+  .strengths-concerns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1rem 0;
+  }
+  .strengths, .concerns {
+    padding: 1rem 1.25rem;
+    border-radius: 6px;
+  }
+  .strengths {
+    background: #f0faf4;
+    border: 1px solid #b8e6cc;
+  }
+  .concerns {
+    background: #fef5f3;
+    border: 1px solid #f0c8c0;
+  }
+  .strengths h4, .concerns h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+  .strengths h4 { color: #1b8a4e; }
+  .concerns h4 { color: #c0392b; }
+
+  /* Flagged Documents */
+  .flagged-docs table td:first-child {
+    font-weight: 600;
+    white-space: nowrap;
+    width: 2rem;
+  }
+
+  /* Gap List */
+  .gap-list { list-style: none; margin-left: 0; }
+  .gap-list li {
+    padding: 0.4rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .gap-list li::before {
+    content: '\2610';
+    position: absolute;
+    left: 0;
+    color: #999;
+  }
+  .priority-high::before { color: #c0392b; }
+  .priority-med::before { color: #c08800; }
+  .priority-low::before { color: #999; }
+
+  /* Priority tags in question lists */
+  .priority-critical {
+    background: #fde8e8;
+    color: #c0392b;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+  .priority-important {
+    background: #fef3d6;
+    color: #9a6700;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+  .priority-nice {
+    background: #f0f0f0;
+    color: #666;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  /* Footer */
+  .report-footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+    font-size: 0.8rem;
+    color: #999;
+    text-align: center;
+  }
+
+  /* Print */
+  @media print {
+    body { padding: 0; font-size: 12px; }
+    .report-header { page-break-after: avoid; }
+    h2 { page-break-after: avoid; }
+    table { page-break-inside: avoid; }
+    .strengths-concerns { page-break-inside: avoid; }
+    .exec-summary { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="report-header">
+  <h1>{{COMPANY_NAME}}</h1>
+  <div class="subtitle">{{REPORT_TYPE}} &mdash; {{DATETIME}}</div>
+  <div class="report-meta">
+    <span><strong>Documents reviewed:</strong> {{DOC_COUNT}}</span>
+    <span><strong>Template:</strong> {{CONFIG_TEMPLATE}}</span>
+    <span><strong>Confidence:</strong> {{CONFIDENCE}}</span>
+  </div>
+</div>
+
+<!--
+  INSTRUCTIONS FOR SKILLS:
+  Replace {{REPORT_BODY}} with the report content converted to HTML.
+
+  Use these CSS classes:
+  - .exec-summary          — wrap executive summary / business model summary
+  - .strengths-concerns    — grid container for side-by-side strengths + concerns
+    - .strengths           — left column (green)
+    - .concerns            — right column (red)
+  - .flagged-docs          — wrap the flagged documents table
+  - .gap-list              — ul for gap/checklist items
+    - .priority-high/med/low — li classes for gap priority
+  - .flag-green/yellow/red — inline colored dots for assessment flags
+  - .priority-critical/important/nice — styled tags for question priorities
+
+  Convert flag emojis to styled spans:
+    green circle  → <span class="flag-green">●</span>
+    yellow circle → <span class="flag-yellow">●</span>
+    red circle    → <span class="flag-red">●</span>
+-->
+
+{{REPORT_BODY}}
+
+<div class="report-footer">
+  Generated by Dealflow &mdash; {{DATETIME}}
+</div>
+
+</body>
+</html>
