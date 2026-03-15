@@ -14,5 +14,11 @@
     "due-diligence",
     "finance",
     "investing"
+  ],
+  "skills": [
+    "./dd-dataroom",
+    "./dd-model",
+    "./dd-questions",
+    "./dd-setup"
   ]
 }

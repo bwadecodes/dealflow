@@ -1,0 +1,21 @@
+{
+  "name": "dealflow",
+  "owner": {
+    "name": "Brian Wade",
+    "email": "bwade818@gmail.com"
+  },
+  "metadata": {
+    "description": "AI-powered due diligence tools for PE and VC investors"
+  },
+  "plugins": [
+    {
+      "name": "dealflow",
+      "source": "./",
+      "description": "AI-powered due diligence tools for PE and VC investors",
+      "version": "1.0.0",
+      "author": {
+        "name": "Brian Wade"
+      }
+    }
+  ]
+}

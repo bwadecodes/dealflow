@@ -1,6 +1,6 @@
 ---
 name: dealflow
-description: AI-powered due diligence tools for PE and VC investors. Install with claude install github:bwadecodes/dealflow.
+description: AI-powered due diligence tools for PE and VC investors. Install with /plugin marketplace add bwadecodes/dealflow then /plugin install dealflow@dealflow.
 ---
 
 # Dealflow

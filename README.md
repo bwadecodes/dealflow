@@ -30,9 +30,14 @@ If you need IT or compliance approval before installing, the [IT & Compliance Gu
 
 ## Install
 
-```bash
-claude install github:bwadecodes/dealflow
+Inside a Claude Code session, run:
+
 ```
+/plugin marketplace add bwadecodes/dealflow
+/plugin install dealflow@dealflow
+```
+
+The first command adds the Dealflow marketplace. The second installs the plugin with all four `/dd-*` skills.
 
 Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (Anthropic's CLI tool). If you don't have it yet, the [CLI Quickstart](docs/cli-quickstart.md) walks you through the full setup — Node.js, Python, Claude Code, and Dealflow — in one pass.
 
