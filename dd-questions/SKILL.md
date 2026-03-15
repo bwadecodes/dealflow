@@ -44,6 +44,10 @@ If found, read them with `Read`. Use the most recent of each (sort by date in fi
 
 If no reports exist, note that the questions will be generated from the rubric and any documents in the folder directly. Tell the user: *"No prior reports found in dd-reports/. I'll generate questions from your rubric and what's in the folder. For better results, run /dd-dataroom and /dd-model first."*
 
+## Timing
+
+Record the current timestamp as `START_TIME` when the skill begins execution. This will be used in the report metadata to calculate duration.
+
 ## Workflow
 
 ### Step 1: Gather question sources
@@ -133,6 +137,21 @@ Save using `Write` to:
 
 ---
 
+## Run Metadata
+
+| Field | Value |
+|-------|-------|
+| Time initiated | YYYY-MM-DD HH:MM:SS |
+| Duration | Xm Ys |
+| Model | [model name, e.g. Claude Sonnet 4] |
+| Input tokens | [count] |
+| Output tokens | [count] |
+| Estimated cost | $X.XX |
+
+Compute duration as `current_time - START_TIME`. For tokens and cost, use the cumulative totals from all API calls during this skill execution. Estimate cost using the rates in `docs/cfo-cost-guide.md`.
+
+---
+
 ## Financial / Accounting
 
 1. **[Critical]** The model shows gross margin improving from 52% to 68%
@@ -189,6 +208,12 @@ If HTML is requested, generate a styled HTML report:
    - `{{CONFIDENCE}}` → omit or leave blank
    - `{{REPORT_BODY}}` → converted HTML content
    - `{{REPORT_TITLE}}` → "DEAL_NAME — Diligence Questions"
+   - `{{TIME_INITIATED}}` → YYYY-MM-DD HH:MM:SS (START_TIME)
+   - `{{DURATION}}` → Xm Ys
+   - `{{MODEL_USED}}` → model name
+   - `{{INPUT_TOKENS}}` → token count
+   - `{{OUTPUT_TOKENS}}` → token count
+   - `{{ESTIMATED_COST}}` → $X.XX
 4. Save to: `<output-dir>/diligence-questions-YYYY-MM-DD.html`
 
 ### Formatting rules

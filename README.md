@@ -24,7 +24,7 @@ Investors who want to move faster through diligence without sacrificing depth. Y
 
 If you've never touched a command line, that's fine — the [CLI Quickstart](docs/cli-quickstart.md) covers everything you need in about 5 minutes.
 
-If you need IT or compliance approval before installing, the [IT & Compliance Guide](docs/it-compliance-guide.md) has a one-page summary of how the tool works, where your data goes, and a template email you can forward to your IT team. If you need budget approval, the [Cost Guide for the CFO](docs/cfo-cost-guide.md) breaks down what it costs per document, per deal, and per year — with a template email for finance.
+If you need IT or compliance approval before installing, the [IT & Compliance Guide](docs/it-compliance-guide.md) has a one-page summary of how the tool works, where your data goes, and a template email you can forward to your IT team.
 
 ---
 
@@ -83,6 +83,8 @@ Builds your diligence config file — your rubric, buy box criteria, and report 
 4. Sets report preferences (output directory, detail level)
 5. Saves to `~/.claude/dealflow/diligence-config.yaml`
 
+Or skip the templates entirely — describe your investment approach (late-stage VC, investment banking, corporate development, credit, real estate, etc.) and it will generate a custom rubric from scratch.
+
 You can maintain multiple configs (e.g., one for your PE fund, one for personal angel investing) and pass the relevant one per invocation with `--config`.
 
 ---
@@ -107,9 +109,9 @@ Reads a deal's data room folder and produces a structured diligence assessment a
 - **Executive summary** — 1-page overview, overall confidence level, top 3 strengths, top 3 concerns
 - **Buy box fit** — how the deal maps to your criteria, with specific callouts on fit and misfit
 - **Category assessments** — one section per rubric category with findings, flags, and evidence
-- **Coverage summary** — exactly which documents were fully read vs. assessed from metadata only, broken down by category, so you can verify nothing important was skipped
 - **Gap list** — missing documents and information, prioritized
 - **Recommended next steps** — what to dig into further
+- **Run metadata** — time initiated, duration, model, tokens, and estimated cost
 
 **Phase 4 — Interactive Mode.** After the report is delivered, you can ask follow-up questions in the same session: *"Dig deeper into the financials," "Compare the P&L across 2023 and 2024," "What does the customer data tell us about retention?"*
 
@@ -142,7 +144,7 @@ Outputs a plain-English summary: *"This is a 5-year SaaS model built on a bottom
 - **Hidden risks** — assumptions that are internally inconsistent or unusually optimistic
 - **Assumptions to test** — the 5-10 assumptions that matter most and need validation
 
-**Phase 4 — Report Output.** Saves to `dd-reports/model-review-YYYY-MM-DD.md`, then drops into interactive mode for follow-up questions.
+**Phase 4 — Report Output.** Saves to `dd-reports/model-review-YYYY-MM-DD.md` with run metadata (time, duration, model, tokens, cost), then drops into interactive mode for follow-up questions.
 
 ---
 
@@ -165,7 +167,7 @@ Synthesizes findings from the data room assessment and model review into a singl
 
 4. **Categorization by domain:** Financial / Accounting, Product / Operations, Market / Competitive, Team / Management, Legal / IP / Regulatory, Customer / Sales / Marketing, Technology / Infrastructure.
 
-**Every question includes the "why"** — what finding or gap triggered it — so anyone reading the list understands the reasoning, not just the ask. Questions are written as you'd actually ask them to a CFO, CEO, or counsel.
+**Every question includes the "why"** — what finding or gap triggered it — so anyone reading the list understands the reasoning, not just the ask. Questions are written as you'd actually ask them to a CFO, CEO, or counsel. Reports include run metadata (time, duration, model, tokens, cost) for transparency.
 
 **Example output:**
 
@@ -197,6 +199,8 @@ The rubric is the backbone of every assessment. It determines what gets prioriti
 | **PE Lower-Middle Market** | $10M – $75M revenue | Financials, QoE, margins, working capital |
 | **PE Middle Market** | $75M – $250M revenue | Operational complexity, platform strategy, leverage |
 | **PE Large Buyout** | $250M+ revenue | Capital structure, integration, regulatory, institutional ops |
+
+These templates are starting points, not limits. During `/dd-setup`, you can ask the AI to generate a custom rubric for any strategy — late-stage VC, investment banking, corporate development, credit, real estate, or anything else. Just describe your approach and it builds one from scratch.
 
 The templates aren't cosmetically different — they reflect how different types of investors actually think about diligence. VC weights founder dynamics and market; Growth Equity blends financial rigor with growth metrics; PE templates scale from earnings quality at the lower end to capital structure and platform strategy at the upper end.
 
@@ -243,9 +247,9 @@ You can maintain different configs for different contexts and pass them per invo
 
 **File reading:** PDFs via [pymupdf](https://pymupdf.readthedocs.io/), Excel via [openpyxl](https://openpyxl.readthedocs.io/) (dual-open: formulas + cached values), Word via [python-docx](https://python-docx.readthedocs.io/). CSV and images read directly. Python dependencies install automatically on first run.
 
-**Context management:** Not every document is read cover-to-cover. Phase 1 scans filenames and folder structure to categorize and prioritize documents by rubric weight (high → medium → low). Phase 2 reads documents in priority order using parallel subagents (3-4), each handling a slice of rubric categories with its own context window. In a typical 200-document room, ~80% of files are fully read; the rest are low-priority items assessed from filename and folder location only. Every report includes a **Coverage Summary** listing exactly which documents were fully read and which were not, so you can verify nothing material was missed. If subagent dispatch fails, it falls back to sequential processing.
+**Context management:** Large data rooms (hundreds of files) are triaged — Phase 1 reads filenames only, Phase 2 reads selectively based on rubric priority. The data room skill uses parallel subagents (3-4) to split the work across rubric categories, each with its own context window. If subagent dispatch fails, it falls back to sequential processing.
 
-**Reports:** All output is markdown, saved to `{deal-folder}/dd-reports/` with date stamps. Reports from different runs don't overwrite each other. v1 is markdown-only; DOCX export is planned.
+**Reports:** All output is markdown, saved to `{deal-folder}/dd-reports/` with date stamps. Reports from different runs don't overwrite each other. Each report includes run metadata — model used, token counts, duration, and estimated cost — so you always know what an analysis cost. v1 is markdown-only; DOCX export is planned.
 
 ---
 
@@ -255,7 +259,6 @@ You can maintain different configs for different contexts and pass them per invo
 |-------|----------|----------------|
 | [CLI Quickstart](docs/cli-quickstart.md) | Investors new to the command line | Opening a terminal, navigating folders, installing Claude Code, running your first command |
 | [IT & Compliance Guide](docs/it-compliance-guide.md) | IT teams, compliance officers | Data flow, subscription tiers, security references, template approval email |
-| [Cost Guide for the CFO](docs/cfo-cost-guide.md) | CFOs, finance teams | Token costs per document type, per-deal cost estimates, annual budget scenarios, template approval email |
 | [Rubric Customization Guide](docs/rubric-guide.md) | All users | Adding/removing categories, adjusting weights, writing effective questions, maintaining multiple configs |
 
 ---

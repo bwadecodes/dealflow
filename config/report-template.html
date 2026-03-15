@@ -46,6 +46,15 @@
     color: #666;
   }
   .report-meta span { white-space: nowrap; }
+  .run-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #888;
+  }
+  .run-metadata span { white-space: nowrap; }
 
   /* Sections */
   h2 {
@@ -219,6 +228,13 @@
     <span><strong>Template:</strong> {{CONFIG_TEMPLATE}}</span>
     <span><strong>Confidence:</strong> {{CONFIDENCE}}</span>
   </div>
+  <div class="run-metadata">
+    <span><strong>Started:</strong> {{TIME_INITIATED}}</span>
+    <span><strong>Duration:</strong> {{DURATION}}</span>
+    <span><strong>Model:</strong> {{MODEL_USED}}</span>
+    <span><strong>Tokens:</strong> {{INPUT_TOKENS}} in / {{OUTPUT_TOKENS}} out</span>
+    <span><strong>Est. cost:</strong> {{ESTIMATED_COST}}</span>
+  </div>
 </div>
 
 <!--
@@ -235,6 +251,14 @@
     - .priority-high/med/low — li classes for gap priority
   - .flag-green/yellow/red — inline colored dots for assessment flags
   - .priority-critical/important/nice — styled tags for question priorities
+
+  Run metadata placeholders (in .run-metadata div):
+  - {{TIME_INITIATED}}  — when the skill started (YYYY-MM-DD HH:MM:SS)
+  - {{DURATION}}        — total run time (Xm Ys)
+  - {{MODEL_USED}}      — Claude model name
+  - {{INPUT_TOKENS}}    — total input tokens
+  - {{OUTPUT_TOKENS}}   — total output tokens
+  - {{ESTIMATED_COST}}  — estimated API cost ($X.XX)
 
   Convert flag emojis to styled spans:
     green circle  → <span class="flag-green">●</span>

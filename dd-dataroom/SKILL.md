@@ -69,6 +69,10 @@ Before starting the assessment, determine the **deal/company name**:
 
 Store this as `DEAL_NAME` — it will be used in all report headers.
 
+## Timing
+
+Record the current timestamp as `START_TIME` when the skill begins execution. This will be used in the report metadata to calculate duration.
+
 ## Phase 1: Inventory & Triage
 
 Scan the folder tree. Read **filenames and folder structure only** — do not open files yet.
@@ -247,6 +251,21 @@ Use today's date. If a report with the same date exists, append a sequence numbe
 
 ---
 
+## Run Metadata
+
+| Field | Value |
+|-------|-------|
+| Time initiated | YYYY-MM-DD HH:MM:SS |
+| Duration | Xm Ys |
+| Model | [model name, e.g. Claude Sonnet 4] |
+| Input tokens | [count] |
+| Output tokens | [count] |
+| Estimated cost | $X.XX |
+
+Compute duration as `current_time - START_TIME`. For tokens and cost, use the cumulative totals from all API calls during this skill execution (including subagent calls). Estimate cost using the rates in `docs/cfo-cost-guide.md`.
+
+---
+
 ## Executive Summary
 
 [1-page overview in plain English. What does this deal look like at first glance?]
@@ -389,6 +408,12 @@ If HTML is requested, generate a styled HTML report:
    - `{{CONFIDENCE}}` → High / Medium / Low
    - `{{REPORT_BODY}}` → converted HTML content (everything below the header)
    - `{{REPORT_TITLE}}` → "DEAL_NAME — Data Room Assessment"
+   - `{{TIME_INITIATED}}` → YYYY-MM-DD HH:MM:SS (START_TIME)
+   - `{{DURATION}}` → Xm Ys
+   - `{{MODEL_USED}}` → model name
+   - `{{INPUT_TOKENS}}` → token count
+   - `{{OUTPUT_TOKENS}}` → token count
+   - `{{ESTIMATED_COST}}` → $X.XX
 4. Save to: `<output-dir>/dataroom-assessment-YYYY-MM-DD.html`
 
 The HTML file can be opened in any browser and printed to PDF for sharing with senior stakeholders.

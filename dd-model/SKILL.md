@@ -68,6 +68,10 @@ Before starting the review, determine the **deal/company name**:
 
 Store this as `DEAL_NAME` — it will be used in the report header.
 
+## Timing
+
+Record the current timestamp as `START_TIME` when the skill begins execution. This will be used in the report metadata to calculate duration.
+
 ## Phase 1: Model Comprehension
 
 Open the workbook **twice** — this is critical:
@@ -175,6 +179,21 @@ Save using `Write` to:
 
 ---
 
+## Run Metadata
+
+| Field | Value |
+|-------|-------|
+| Time initiated | YYYY-MM-DD HH:MM:SS |
+| Duration | Xm Ys |
+| Model | [model name, e.g. Claude Sonnet 4] |
+| Input tokens | [count] |
+| Output tokens | [count] |
+| Estimated cost | $X.XX |
+
+Compute duration as `current_time - START_TIME`. For tokens and cost, use the cumulative totals from all API calls during this skill execution. Estimate cost using the rates in `docs/cfo-cost-guide.md`.
+
+---
+
 ## Business Model Summary
 
 [Plain-English description of what the model says the business is and how it makes money. Written for an investor, not an accountant. 2-3 paragraphs.]
@@ -261,6 +280,12 @@ If HTML is requested, generate a styled HTML report:
    - `{{CONFIDENCE}}` → omit or leave blank
    - `{{REPORT_BODY}}` → converted HTML content
    - `{{REPORT_TITLE}}` → "DEAL_NAME — Financial Model Review"
+   - `{{TIME_INITIATED}}` → YYYY-MM-DD HH:MM:SS (START_TIME)
+   - `{{DURATION}}` → Xm Ys
+   - `{{MODEL_USED}}` → model name
+   - `{{INPUT_TOKENS}}` → token count
+   - `{{OUTPUT_TOKENS}}` → token count
+   - `{{ESTIMATED_COST}}` → $X.XX
 4. Save to: `<output-dir>/model-review-YYYY-MM-DD.html`
 
 ## Interactive Mode

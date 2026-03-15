@@ -41,6 +41,8 @@ Present the five options:
 
 Use `AskUserQuestion` to get the selection.
 
+> **Tip:** These five templates are just starting points. You can also ask me to generate a custom rubric tailored to your specific focus — late-stage VC, investment banking, corporate development, credit, real estate, or any other strategy. Just describe your investment approach and I'll build a rubric from scratch.
+
 ### Step 2: Load the template
 
 Based on the selection, read the corresponding default config using `Read`:
