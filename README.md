@@ -1,4 +1,4 @@
-# Dealflow: AI-Powered Diligence Tools for PE & VC Investors
+# Dealflow /Skills: Claude Code AI-Powered Diligence Tools for PE & VC Investors
 
 Point it at a data room folder or a financial model, and it produces the kind of analysis you'd normally spend days on — organized against your own diligence rubric.
 
