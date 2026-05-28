@@ -2,7 +2,7 @@
 
 Point it at a data room folder or a financial model, and it produces the kind of analysis you'd normally spend days on — organized against your own diligence rubric.
 
-Dealflow is a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills package that gives PE and VC investors structured, AI-assisted due diligence workflows. The first release focuses on **diligence** — the highest-value, most-frequent workflow. Sourcing and post-deal modules are on the [roadmap](#roadmap).
+Dealflow is a [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills package that gives PE and VC investors structured, AI-assisted workflows across the deal lifecycle — from prescreen, through diligence and review, to term sheet. Sourcing and post-deal modules are on the [roadmap](#roadmap).
 
 Built by [Brian Wade](https://github.com/bwadecodes), an investor who has worked across [PE, growth equity, and VC](https://www.linkedin.com/in/brianmwade/).
 
@@ -10,11 +10,30 @@ Built by [Brian Wade](https://github.com/bwadecodes), an investor who has worked
 
 ## What It Does
 
-- **Point it at a data room** and get a structured assessment — findings, strength/concern flags, gap analysis, and recommended next steps — organized against your own diligence rubric.
-- **Point it at a financial model** and get a plain-English review of the business model, key drivers, assumption reasonableness, sensitivity analysis, and hidden risks.
-- **Generate a prioritized diligence question list** that synthesizes findings from both the data room and model review into the actual questions you'd want to ask management — not generic boilerplate.
+Dealflow v2 covers the full deal lifecycle — prescreen through term sheet:
 
-Each skill can be used independently or sequenced together. Run the data room assessment first, then the model review, then generate questions that synthesize everything. Or just point the model reviewer at an Excel file and get a standalone analysis. Your call.
+**Front door**
+- **Prescreen** a deal from a pitch deck or CIM. Get a memo + simple model in minutes.
+- **Desk research** on industry, competitors, news, and filings with full citations.
+
+**Diligence**
+- **Data room assessment** against your rubric, with findings, flags, and gap analysis.
+- **Financial model review** — drivers, assumption reasonableness, hidden risks.
+- **Diligence question list** — prioritized, deduped, with the "why" attached to every question.
+- **Super analyst** — propose interesting analyses, execute as auditable Excel, or enhance/review existing analyses.
+- **Cohort analysis** — specialized SaaS retention/NRR/GRR/concentration playbook.
+
+**Review**
+- **VP review** — line-by-line scrub for correctness and completeness. Catches math errors, broken citations, inconsistent claims, and unreasonable model assumptions.
+- **Pre-IC review** — everything VP review does plus thoroughness, deeper model pressure-testing, devil's advocate, and pre-emptive IC question prep.
+
+**Execution**
+- **Deal process** — phases, third-party scope, workstream tracker. Stateful.
+- **Checklist** — quick state-of-the-deal snapshot, cheap to run often.
+- **Returns model** — standalone with full sensitivities, decoupled from operating model.
+- **Term sheet** — cap table analysis + pro forma + draft TS aligned with firm preferences.
+
+Outputs match **your firm's voice and templates** when you onboard sample materials via `/dealflow-firmstyle`. Each deal builds a persistent `.dealflow/` index so skills compose cleanly.
 
 ---
 
@@ -37,7 +56,7 @@ Inside a Claude Code session, run:
 /plugin install dealflow@dealflow
 ```
 
-The first command adds the Dealflow marketplace. The second installs the plugin with all four `/dealflow-*` skills.
+The first command adds the Dealflow marketplace. The second installs the plugin with all 15 `/dealflow-*` skills.
 
 Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (Anthropic's CLI tool). If you don't have it yet, the [CLI Quickstart](docs/cli-quickstart.md) walks you through the full setup — Node.js, Python, Claude Code, and Dealflow — in one pass.
 
@@ -50,144 +69,98 @@ Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (Anthropi
 
 ## Quick Start
 
-**1. Set up your diligence config** (one-time, ~3 minutes):
+**1. One-time setup (~5 minutes):**
 ```
-/dealflow-setup
-```
-Choose from five starting templates, customize your rubric and buy box, and save your preferences. Every other skill reads this config.
-
-**2. Assess a data room:**
-```
-/dealflow-dataroom ~/Deals/Acme-Corp/Data-Room "B2B SaaS, ~$8M ARR, Series A, 200 enterprise customers"
+/dealflow-setup                              # rubric, buy box, preferences
+/dealflow-firmstyle ~/firm-samples           # optional: capture firm voice & templates
 ```
 
-**3. Review a financial model:**
+**2. Prescreen a new deal:**
 ```
-/dealflow-model ~/Deals/Acme-Corp/Model/Acme-Model-v3.xlsx "B2B SaaS, Series A at $40M pre"
-```
-
-**4. Generate diligence questions:**
-```
-/dealflow-questions ~/Deals/Acme-Corp
+/dealflow-prescreen ~/Deals/Acme/deck.pdf
 ```
 
-Reports are saved to a `reports/` folder inside your deal directory, dated so multiple runs don't overwrite each other.
+**3. If pursuing, set up the deal:**
+```
+/dealflow-process ~/Deals/Acme               # process plan + tracker
+/dealflow-deskresearch "Acme Corp" --deal-folder ~/Deals/Acme
+```
+
+**4. Run diligence:**
+```
+/dealflow-dataroom ~/Deals/Acme/Data-Room "B2B SaaS, ~$8M ARR, Series A"
+/dealflow-model ~/Deals/Acme/Model.xlsx
+/dealflow-cohort ~/Deals/Acme/customers.csv --deal-folder ~/Deals/Acme
+/dealflow-superanalyst ~/Deals/Acme/transactions.csv --create
+/dealflow-questions ~/Deals/Acme
+```
+
+**5. Pressure test before IC:**
+```
+/dealflow-vp-review ~/Deals/Acme             # correctness + completeness
+/dealflow-pre-ic ~/Deals/Acme                # plus thoroughness, stress test, devil's advocate
+```
+
+**6. Move to term sheet:**
+```
+/dealflow-returns ~/Deals/Acme
+/dealflow-termsheet ~/Deals/Acme
+```
+
+**Anytime, check status:**
+```
+/dealflow-checklist ~/Deals/Acme
+```
+
+Reports save to `<deal-folder>/reports/`, dated so multiple runs don't overwrite each other. Deal state and the materials index live in `<deal-folder>/.dealflow/`.
 
 ---
 
 ## Skills
 
-### `/dealflow-setup` — Configuration Wizard
+15 skills covering setup, sourcing-adjacent front door, diligence, review, and execution. Each is invoked as `/dealflow-<name>`. Run any one independently or chain them — every skill is self-contained but composes with the others through the shared deal state and index.
 
-Builds your diligence config file — your rubric, buy box criteria, and report preferences. Run this once before your first data room review. Update it when your investment criteria change or when you want a different config for a different fund.
+### Setup
 
-**What it does:**
-1. Presents five starting templates (Venture Capital, Growth Equity, PE Lower-Middle Market, PE Middle Market, PE Large Buyout)
-2. Walks through each rubric category — keep as-is, adjust weights, add/remove questions
-3. Configures your buy box criteria (revenue range, stage, ownership target, sector focus)
-4. Sets report preferences (output directory, detail level)
-5. Saves to `~/.claude/dealflow/diligence-config.yaml`
+| Skill | Purpose |
+|---|---|
+| `/dealflow-setup` | Build your diligence config: rubric, buy box, preferences. Run once. |
+| `/dealflow-firmstyle` | Capture firm voice, templates, term preferences, visual identity from sample materials. Makes every output sound like *your* firm. |
 
-Or skip the templates entirely — describe your investment approach (late-stage VC, investment banking, corporate development, credit, real estate, etc.) and it will generate a custom rubric from scratch.
+### Front Door
 
-You can maintain multiple configs (e.g., one for your PE fund, one for personal angel investing) and pass the relevant one per invocation with `--config`.
+| Skill | Purpose |
+|---|---|
+| `/dealflow-prescreen` | Prescreen memo + simple model from a pitch deck, CIM, or just a description. The natural front door to a new deal. |
+| `/dealflow-deskresearch` | Pull industry reports, news, competitors, public filings. Configurable focus, source count (10/50/100), and stealth mode. MD + PDF output with full citations. |
 
----
+### Diligence
 
-### `/dealflow-dataroom` — Data Room Assessment
+| Skill | Purpose |
+|---|---|
+| `/dealflow-dataroom` | Structured assessment of a data room against your rubric. Builds the persistent deal index. |
+| `/dealflow-model` | Drivers, assumption reasonableness, inflection points, hidden risks. |
+| `/dealflow-questions` | Prioritized question list synthesizing dataroom + model + rubric. Deduped, categorized, every question with the "why" attached. |
+| `/dealflow-superanalyst` | Create (raw data → analyses → auditable Excel), enhance (extend existing), or review (audit existing for correctness). |
+| `/dealflow-cohort` | Specialized SaaS retention/NRR/GRR/concentration playbook. Templated, runs the standard set. |
 
-Reads a deal's data room folder and produces a structured diligence assessment against your rubric. This is the workhorse skill — it handles everything from a clean 20-file room to a messy 600-file dump.
+### Review
 
-**Invocation:**
-```
-/dealflow-dataroom <path-to-data-room-folder>
-/dealflow-dataroom <path-to-data-room-folder> "<optional deal context>"
-```
+| Skill | Purpose |
+|---|---|
+| `/dealflow-vp-review` | Line-by-line scrub for correctness and completeness. Math errors, broken citations, inconsistent claims, plus a reasonableness check on model assumptions and cases. Not a judgement call on the deal. |
+| `/dealflow-pre-ic` | Everything VP review does plus thoroughness of analysis, deeper model pressure-testing (independent base case re-grade, true-downside construction), devil's advocate, and pre-emptive IC question prep. |
 
-**How it works:**
+### Execution
 
-**Phase 1 — Inventory & Triage.** Scans the folder tree (filenames and structure only — doesn't open files yet). Produces a document manifest, categorizes files by type (financials, legal, product, marketing, team, customer), runs a gap analysis against your rubric, and builds a prioritized read order. Presents a summary and asks: *"Here's what I found in the room. Want me to proceed with the full assessment, or focus on specific areas?"*
+| Skill | Purpose |
+|---|---|
+| `/dealflow-process` | Deal process plan + workstream tracker. Stateful — re-runs update status. |
+| `/dealflow-checklist` | Quick state-of-the-deal snapshot. Cheap, runs in seconds, designed for daily use. |
+| `/dealflow-returns` | Standalone returns model with full sensitivities. Decoupled from the operating model so you can iterate on structure. |
+| `/dealflow-termsheet` | Cap table + charter analysis, pro forma cap table with waterfall, term sheet draft aligned with firm preferences. **Counsel must review before use.** |
 
-**Phase 2 — Structured Assessment.** Reads documents in priority order using parallel subagents (3-4 max) to manage context windows on large rooms — one agent handles financials and accounting, another legal and IP, another product and market, another team and customers. For each rubric category, produces findings with specific document references, strength/concern flags (green, yellow, red), information quality notes, and cross-references where documents corroborate or contradict each other.
-
-**Phase 3 — Report Output.** Saves a structured report to `reports/dataroom-assessment-YYYY-MM-DD.md` with:
-- **Executive summary** — 1-page overview, overall confidence level, top 3 strengths, top 3 concerns
-- **Buy box fit** — how the deal maps to your criteria, with specific callouts on fit and misfit
-- **Category assessments** — one section per rubric category with findings, flags, and evidence
-- **Gap list** — missing documents and information, prioritized
-- **Recommended next steps** — what to dig into further
-- **Run metadata** — time initiated, duration, model, tokens, and estimated cost
-
-**Phase 4 — Interactive Mode.** After the report is delivered, you can ask follow-up questions in the same session: *"Dig deeper into the financials," "Compare the P&L across 2023 and 2024," "What does the customer data tell us about retention?"*
-
-**Supported file types:** PDF, Excel (.xlsx), Word (.docx), CSV, TXT, images (PNG, JPG). Password-protected and unsupported files are flagged and skipped with a clear message.
-
----
-
-### `/dealflow-model` — Financial Model Review
-
-Reads a financial model (.xlsx) and produces a business-intelligence-focused review — understanding the business model, mapping key drivers, testing assumptions, and surfacing the data points that matter most for your investment decision.
-
-**Invocation:**
-```
-/dealflow-model <path-to-excel-file>
-/dealflow-model <path-to-excel-file> "<optional deal context>"
-```
-
-**How it works:**
-
-**Phase 1 — Model Comprehension.** Opens the workbook twice — once with formulas visible (to understand model structure and relationships) and once with computed values (to see the actual numbers). Maps out the tab inventory, identifies the business model (SaaS? Marketplace? DTC?), and traces the key drivers: what feeds into revenue, what drives costs, and how deep the assumptions go.
-
-Outputs a plain-English summary: *"This is a 5-year SaaS model built on a bottoms-up seat-based pricing structure with three customer tiers. Revenue is driven by..."*
-
-**Phase 2 — Assumption Analysis.** For each key driver: what's assumed (actual numbers and rates), how deep the build is (single growth % vs. built from unit economics and cohort data), reasonableness flags (conservative, in-line, or aggressive compared to historicals), and sensitivity — which assumptions move the needle most.
-
-**Phase 3 — Key Data Points & Insights.** The business intelligence layer:
-- **Inflection points** — step-changes in the model (e.g., "Gross margin jumps from 62% to 78% in Year 3 as the company shifts from professional services to software")
-- **Operating leverage** — where margins expand as revenue scales
-- **Cash dynamics** — burn rate, runway, when does the business turn cash-flow positive
-- **Hidden risks** — assumptions that are internally inconsistent or unusually optimistic
-- **Assumptions to test** — the 5-10 assumptions that matter most and need validation
-
-**Phase 4 — Report Output.** Saves to `reports/model-review-YYYY-MM-DD.md` with run metadata (time, duration, model, tokens, cost), then drops into interactive mode for follow-up questions.
-
----
-
-### `/dealflow-questions` — Diligence Question List
-
-Synthesizes findings from the data room assessment and model review into a single, prioritized list of diligence questions. Works best after `/dealflow-dataroom` and `/dealflow-model` have run (reads their reports from `reports/`). Can also run standalone.
-
-**Invocation:**
-```
-/dealflow-questions <path-to-deal-folder>
-```
-
-**How it builds the list:**
-
-1. **Three sources:** Data room gaps and concerns, model assumptions that need testing, and rubric-driven baseline questions that apply regardless of deal-specific findings.
-
-2. **Deduplication and merging:** Overlapping items become one question. If the model flags a margin assumption AND the data room is missing COGS detail, that becomes one question — not two.
-
-3. **Prioritization:** Critical (deal-breaker if unanswered), Important (needed for IC memo), Nice to have (would improve understanding).
-
-4. **Categorization by domain:** Financial / Accounting, Product / Operations, Market / Competitive, Team / Management, Legal / IP / Regulatory, Customer / Sales / Marketing, Technology / Infrastructure.
-
-**Every question includes the "why"** — what finding or gap triggered it — so anyone reading the list understands the reasoning, not just the ask. Questions are written as you'd actually ask them to a CFO, CEO, or counsel. Reports include run metadata (time, duration, model, tokens, cost) for transparency.
-
-**Example output:**
-
-```markdown
-## Financial / Accounting
-
-1. [Critical] The model shows gross margin improving from 52% to 58%
-   between Y1 and Y2 — what specifically drives this? Is there a signed
-   manufacturing agreement that supports the new COGS assumptions?
-
-2. [Important] Monthly P&L shows a $2mm marketing spike in March 2024
-   with no corresponding revenue lift. What was this spend and what was learned?
-```
-
-After output, interactive mode for refinement: *"Add questions about supply chain risk," "Rewrite these for sending to the CFO," "Which ones should I ask in the first management meeting?"*
+Each skill has its own SKILL.md with full workflow detail. Type `/dealflow-` in Claude Code to see the list.
 
 ---
 
@@ -270,25 +243,22 @@ You can maintain different configs for different contexts and pass them per invo
 
 ## Roadmap
 
-Dealflow currently covers **diligence** — the highest-value, most-frequent investor workflow. Planned modules:
-
-**Diligence (expanding)**
-| Skill | Purpose |
-|-------|---------|
-| `/dealflow-memo` | Draft an IC pre-screen or full diligence memo from findings |
+Dealflow v2 covers the full deal lifecycle from prescreen through term sheet. Two future modules:
 
 **Sourcing**
 | Skill | Purpose |
 |-------|---------|
-| `/src-deepdive` | Thematic research on an industry or trend |
-| `/src-screen` | Screen companies against buy box criteria |
+| `/dealflow-deepdive` | Thematic research on an industry or trend |
+| `/dealflow-screen` | Screen companies against buy box criteria |
+| `/dealflow-pipeline` | Pipeline tracker with conversion analytics |
 
 **Post-Deal**
 | Skill | Purpose |
 |-------|---------|
-| `/pd-180` | Build and track a 180-day post-close plan |
-| `/pd-board` | Prepare board meeting materials |
-| `/pd-monitor` | Monthly reporting and KPI tracking |
+| `/dealflow-180` | Build and track a 180-day post-close plan |
+| `/dealflow-board` | Prepare board meeting materials |
+| `/dealflow-monitor` | Monthly reporting and KPI tracking |
+| `/dealflow-lp` | LP letters and quarterly updates in firm voice |
 
 ---
 

@@ -23,6 +23,18 @@ Glob ~/.claude/dealflow/diligence-config.yaml
 
 If it exists, read it and ask: *"You already have a config file. Want to update it or start fresh?"*
 
+### Python dependency
+
+```bash
+python3 -c "import yaml" 2>/dev/null || pip install pyyaml --quiet
+```
+
+### After save — point to next step
+
+Once the config is saved, tell the user about `/dealflow-firmstyle`:
+
+> *"Config saved. Optional next step: run /dealflow-firmstyle to upload sample IC memos, models, and term sheets — every other skill will then produce output that matches your firm's voice and templates."*
+
 ## Workflow
 
 ### Step 1: Choose a starting template

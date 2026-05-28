@@ -54,6 +54,33 @@ If found, read them with `Read`. Use the most recent of each (sort by date in fi
 
 If no reports exist, note that the questions will be generated from the rubric and any documents in the folder directly. Tell the user: *"No prior reports found in reports/. I'll generate questions from your rubric and what's in the folder. For better results, run /dealflow-dataroom and /dealflow-model first."*
 
+### 3. Check deal index (v2)
+
+Before reading source reports in full, check whether the deal index has them and what facts have been extracted:
+
+```bash
+python3 "$DEALFLOW_ROOT/scripts/dealflow-state.py" init "<deal-folder>" 2>/dev/null
+python3 "$DEALFLOW_ROOT/scripts/dealflow-index.py" init "<deal-folder>" 2>/dev/null
+
+# Pull all facts from prior assessments
+python3 "$DEALFLOW_ROOT/scripts/dealflow-index.py" query "<deal-folder>" --tags "gaps,concerns,assumptions"
+```
+
+Index facts are cheaper to read than full reports. Use them as your primary signal; fall back to reading reports when you need detail.
+
+After producing the question list, register and index it:
+
+```bash
+python3 "$DEALFLOW_ROOT/scripts/dealflow-state.py" add-skill-run "<deal-folder>" \
+  --skill dealflow-questions --report "<report-path>"
+
+python3 "$DEALFLOW_ROOT/scripts/dealflow-index.py" add "<deal-folder>" \
+  --path "<report-relative-path>" --category questions --type md \
+  --indexed-by dealflow-questions \
+  --summary "Diligence question list — N critical, M important, K nice-to-have" \
+  --tags "questions,diligence"
+```
+
 ## Timing
 
 Record the current timestamp as `START_TIME` when the skill begins execution. This will be used in the report metadata to calculate duration.

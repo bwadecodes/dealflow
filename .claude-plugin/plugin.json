@@ -16,9 +16,20 @@
     "investing"
   ],
   "skills": [
+    "./dealflow-setup",
+    "./dealflow-firmstyle",
+    "./dealflow-prescreen",
+    "./dealflow-deskresearch",
     "./dealflow-dataroom",
     "./dealflow-model",
     "./dealflow-questions",
-    "./dealflow-setup"
+    "./dealflow-superanalyst",
+    "./dealflow-cohort",
+    "./dealflow-vp-review",
+    "./dealflow-pre-ic",
+    "./dealflow-process",
+    "./dealflow-checklist",
+    "./dealflow-returns",
+    "./dealflow-termsheet"
   ]
 }

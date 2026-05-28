@@ -10,9 +10,44 @@
   - `/dd-questions` → `/dealflow-questions`
 - **Reports directory** — default output renamed from `dd-reports/` to `reports/`. Existing v1 directories continue to work.
 
-### Foundation for v2 expansion
-- Adds `design-spec-v2.md` capturing the expanded v2 architecture: deal state + persistent index (`.dealflow/`), shared Excel/PDF authors, expansive firm-style profile, and 11 new skills (firmstyle, prescreen, deskresearch, superanalyst, cohort, vp-review, pre-ic, process, checklist, returns, termsheet).
-- v1 `design-spec.md` retained as historical reference.
+### New shared infrastructure
+- **Deal state + index** — each deal folder gets a `.dealflow/` directory with `deal-state.yaml` (stage, skills run, decisions, workstreams) and `index.jsonl` (persistent, append-only index of materials with hash-based staleness detection). Any skill creates these on first use.
+- **Excel author** — `dealflow_lib.excel.ExcelAuthor` builds auditable workbooks with source/calc/method/summary tabs and firm-style formatting.
+- **PDF author** — Markdown → PDF via pandoc (preferred) or weasyprint, with firm-style CSS.
+- **CLI wrappers** — `scripts/dealflow-state.py`, `scripts/dealflow-index.py`, `scripts/dealflow-pdf.py` for skill invocation via Bash.
+
+### 11 new skills
+
+**Setup**
+- `/dealflow-firmstyle` — capture firm voice, templates, term preferences, and visual identity from sample IC memos, models, term sheets, and marketing materials.
+
+**Front door**
+- `/dealflow-prescreen` — prescreen memo + simple model from a pitch deck, CIM, or description.
+- `/dealflow-deskresearch` — industry/news/competitor research with preamble dialog, configurable source count, and stealth mode.
+
+**Diligence**
+- `/dealflow-superanalyst` — create, enhance, or review auditable Excel analyses.
+- `/dealflow-cohort` — SaaS retention/NRR/GRR/concentration playbook.
+
+**Review**
+- `/dealflow-vp-review` — correctness and completeness scrub with model reasonableness check.
+- `/dealflow-pre-ic` — VP review plus thoroughness, deeper model pressure-testing, devil's advocate, and IC question prep.
+
+**Execution**
+- `/dealflow-process` — deal process plan + workstream tracker (stateful).
+- `/dealflow-checklist` — quick state-of-the-deal snapshot.
+- `/dealflow-returns` — standalone returns model with full sensitivities.
+- `/dealflow-termsheet` — cap table + charter analysis, pro forma, TS draft.
+
+### Existing skills updated
+- All four v1 skills now lazy-init deal state and index, and write back to them.
+- `/dealflow-setup` points users toward `/dealflow-firmstyle` after config save.
+
+### Documentation
+- `design-spec-v2.md` documents the v2 architecture; v1 `design-spec.md` retained as historical reference.
+- README and root SKILL.md updated to cover all 15 skills and the new quick-start flow.
+- `scripts/validate.py` updated for the v2 layout and skill list.
+- `scripts/dealflow_lib/tests/smoke_test.py` verifies state, index, firmstyle, Excel, and PDF infrastructure end-to-end.
 
 ## 1.1.0 --- 2026-03-14
 

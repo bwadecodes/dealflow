@@ -70,6 +70,45 @@ Glob <path>/**/*
 
 If empty: *"This folder appears to be empty. Double-check the path and try again."*
 
+### 4. Initialize deal state and index (v2)
+
+The deal folder is the parent of the data room. Init lazily:
+
+```bash
+DEAL_FOLDER="$(dirname '<path-to-data-room>')"
+python3 "$DEALFLOW_ROOT/scripts/dealflow-state.py" init "$DEAL_FOLDER" 2>/dev/null
+python3 "$DEALFLOW_ROOT/scripts/dealflow-index.py" init "$DEAL_FOLDER" 2>/dev/null
+```
+
+(`$DEALFLOW_ROOT` is the dealflow plugin install directory. If the env var isn't set, find it by walking up from the SKILL.md location.)
+
+During Phase 2 (Structured Assessment), as you read each document, add it to the index:
+
+```bash
+python3 "$DEALFLOW_ROOT/scripts/dealflow-index.py" add "$DEAL_FOLDER" \
+  --path "<relative-path-from-deal-folder>" \
+  --category "<rubric-category>" --type "<ext>" \
+  --indexed-by dealflow-dataroom \
+  --summary "<one-line summary>" \
+  --tags "<comma,separated,tags>"
+```
+
+For each material finding (a fact you'd want another skill to discover later):
+
+```bash
+python3 "$DEALFLOW_ROOT/scripts/dealflow-index.py" add-fact "$DEAL_FOLDER" \
+  --path "<relative-path>" --fact "<finding>" \
+  --source-ref "<page/sheet/cell>" --added-by dealflow-dataroom
+```
+
+After completing the assessment, register the skill run:
+
+```bash
+python3 "$DEALFLOW_ROOT/scripts/dealflow-state.py" add-skill-run "$DEAL_FOLDER" \
+  --skill dealflow-dataroom --report "<report-path>"
+python3 "$DEALFLOW_ROOT/scripts/dealflow-state.py" set-stage "$DEAL_FOLDER" --stage diligence
+```
+
 ## Deal Identification
 
 Before starting the assessment, determine the **deal/company name**:

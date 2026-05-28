@@ -68,6 +68,34 @@ If the file is password-protected: *"This file is password-protected. Remove the
 
 If the file is not `.xlsx`: *"This skill works with .xlsx files. If your model is in Google Sheets, download it as .xlsx first."*
 
+### 4. Initialize deal state and index (v2)
+
+The deal folder is the model file's parent (or grandparent if the model is in a subfolder). Init lazily:
+
+```bash
+DEAL_FOLDER="$(dirname '<path-to-model>')"   # or grandparent if model is in Model/
+python3 "$DEALFLOW_ROOT/scripts/dealflow-state.py" init "$DEAL_FOLDER" 2>/dev/null
+python3 "$DEALFLOW_ROOT/scripts/dealflow-index.py" init "$DEAL_FOLDER" 2>/dev/null
+```
+
+After completing the review:
+
+```bash
+python3 "$DEALFLOW_ROOT/scripts/dealflow-state.py" add-skill-run "$DEAL_FOLDER" \
+  --skill dealflow-model --report "<report-path>"
+
+python3 "$DEALFLOW_ROOT/scripts/dealflow-index.py" add "$DEAL_FOLDER" \
+  --path "<relative-model-path>" --category model --type xlsx \
+  --indexed-by dealflow-model --summary "<one-line model description>" \
+  --tags "model,financial"
+
+# Add facts for key drivers, headline metrics
+python3 "$DEALFLOW_ROOT/scripts/dealflow-index.py" add-fact "$DEAL_FOLDER" \
+  --path "<relative-model-path>" \
+  --fact "Base case Y5 revenue: \$X" --source-ref "<tab>!<cell>" \
+  --added-by dealflow-model
+```
+
 ## Deal Identification
 
 Before starting the review, determine the **deal/company name**:
