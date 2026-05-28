@@ -43,6 +43,52 @@ python3 "$DEALFLOW_ROOT/scripts/dealflow-state.py" init "<deal-folder>"
 python3 "$DEALFLOW_ROOT/scripts/dealflow-index.py" init "<deal-folder>"
 ```
 
+## Phase 0 — Context (do this FIRST, before any audit work)
+
+A VP review without context produces a generic mechanical checklist that misses what
+the senior reader actually cares about and treats deliberate design choices as bugs.
+Before opening the model, do TWO things:
+
+### 0a. Ask the user three quick context questions
+
+Use a single `AskUserQuestion` with these three questions:
+
+1. **What's this deliverable for?** — Real IC memo on a live deal, case study for an
+   interview/sourcing exercise, internal model build, partner pre-read, etc. Each
+   has different success criteria and the audit emphasis should differ.
+2. **Who's the audience and what does success look like?** — Internal IC, a specific
+   partner, an external firm (case study), a board pack? What's the user trying to
+   demonstrate or get to?
+3. **What's already been deliberately decided so the review doesn't waste time
+   questioning it?** — Structure choices (tranched / preferred / earn-out), plugs
+   inherited from data room files, framing decisions, scope cuts, intentional case
+   labels, etc. Anything in the model that's there on purpose.
+
+Keep the answers brief and weave them into how you triage findings later. If the
+user skips, default to "real IC memo, internal audience, nothing pre-decided" and
+note that assumption in the report header.
+
+### 0b. Read sibling AI work and analysis BEFORE opening the model
+
+Inside the deal folder, look for and read these BEFORE the audit:
+- `AI Work/*.md` — prior AI-generated artifacts (deal structure docs, earlier model
+  reviews, framing notes). These often contain the WHY behind design choices.
+- `Analysis/*.md` and `Analysis/*.docx` — the user's own framing notes
+- Any `*Notes*`, `*Questions*`, or `Memo Feedback*` files at the project root
+- `reports/` — any prior review reports
+
+Cite these in the final review when relevant ("per `AI Work/Deal Structure v1.md`,
+the Step 2 tranche is designed to..." instead of treating the model in isolation).
+
+### 0c. Default assumption: intentional until proven otherwise
+
+For anyone with real deal experience, "this looks wrong" is usually "I don't yet
+understand why." When you see something unusual (a balance-sheet plug, an
+unconventional structure, a case label that doesn't fit, a comp inflation pattern
+that seems flipped), the FIRST hypothesis is intentional design. Read the sibling
+docs, ask the user, THEN flag if still unexplained. Do not flag deliberate choices
+as bugs.
+
 ## Phase 1 — Discover materials
 
 If `--memo` and `--model` aren't given:
@@ -161,6 +207,35 @@ Flag with severity:
 
 - Are the bull case assumptions individually plausible? (e.g., 60% growth Y4 of a $100M business is rare — flag for justification)
 - Cross-case consistency: if revenue is up 50% bull vs. 0% downside, do S&M and headcount move with it?
+
+### Structured / tranched deals — special rule
+
+If the model has a structured deal (tranched investment, preferred with cap/floor,
+contingent funding, vanilla counterfactual tab, anything with explicit "Step 1 /
+Step 2" or "L2 Structure vs Vanilla" framing), single-case MOIC/IRR comparisons
+are the WRONG test. The structure exists precisely BECAUSE of asymmetric payoffs:
+
+- **Downside protection** via liquidation preference, accruing coupon, walk-away
+  rights on later tranches
+- **Upside participation** via conversion features
+- **Dilution control** for founders, which is the negotiation lever that gets the
+  structure accepted
+
+If you find that the structured deal returns less than the vanilla counterfactual
+at the base case, your FIRST hypothesis is: *the model only runs one exit
+scenario, and the structure's value lives in the tails (downside protection,
+upside conversion mechanics).* The correct test is multi-scenario:
+
+- Run the waterfall at downside, base, upside exits
+- Show the structured-vs-vanilla MOIC delta at each
+- Probability-weight if you have a view
+
+Do NOT flag the base-case underperformance as a bug. Do flag the ABSENCE of
+multi-scenario returns analysis as the gap.
+
+Also: rows labeled "Variance — L2 vs Vanilla" (or similar) often show **founder
+dilution variance**, not investor variance. Read what the row actually computes
+before flagging the label as a bug.
 
 ## Phase 5 — Compile report
 
