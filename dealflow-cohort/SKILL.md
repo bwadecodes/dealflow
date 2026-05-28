@@ -36,6 +36,34 @@ python3 -c "import openpyxl" 2>/dev/null || pip install openpyxl --quiet
 
 If a deal folder is provided, init state and index.
 
+## Phase 0 — Context (do this FIRST, before column mapping)
+
+Cohort analysis without context produces a generic NRR/GRR/retention curve set that may miss what the senior reader actually cares about (segment cuts, specific definitions, cohort exclusions). Before mapping columns, do TWO things:
+
+### 0a. Ask the user three quick context questions
+
+Use a single `AskUserQuestion`:
+
+1. **What's this analysis for?** — Live deal diligence, case study / interview, internal practice, second-opinion on management's retention claims.
+2. **Who's the audience and what does success look like?** — Internal deal team, partner pre-read, IC, external reviewer. What specific retention question is most important to answer?
+3. **What's already been deliberately decided so the analysis doesn't waste time questioning it?** — Cohort definition (signup month vs first-pay month), how to treat partial-month customers, how to define logo churn vs dollar churn, segment cuts the user wants (or explicitly doesn't want), any management framing on NRR/GRR you should test against.
+
+Keep answers brief. If skipped, default to "live deal, internal audience, standard cohort definitions, no specific segmentation pre-decided" and note in the summary.
+
+### 0b. Read sibling AI work and analysis BEFORE starting
+
+If a deal folder is provided, look for and read these BEFORE column mapping:
+- `AI Work/*.md` — prior AI-generated artifacts (prior cohort analyses, retention framing, segmentation decisions). These often contain the WHY behind analytical choices.
+- `Analysis/*.md` — the user's own framing notes
+- Any `*Notes*` or `*Questions*` files
+- `reports/` — any prior review reports
+
+Cite these in the summary when relevant.
+
+### 0c. Default assumption: intentional until proven otherwise
+
+If the customer data has unusual structure (multiple revenue columns, non-standard cohort definitions, columns that look like overrides), the FIRST hypothesis is that the user/management defined them that way on purpose. Ask before treating as data hygiene issues.
+
 ## Phase 1 — Confirm column mapping
 
 Open the data. Show the user the first 5 rows and column headers. Ask them to confirm which column is:

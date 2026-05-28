@@ -31,6 +31,51 @@ python3 -c "import openpyxl" 2>/dev/null || pip install openpyxl --quiet
 
 Init state and index if needed.
 
+## Phase 0 — Context (do this FIRST, before gathering inputs)
+
+A returns model without context produces a generic IRR/MOIC + sensitivity grid that may completely miss the point of the actual structure. This skill is the most likely to encounter structured deals, where single-case returns are the wrong test. Before gathering inputs, do TWO things:
+
+### 0a. Ask the user three quick context questions
+
+Use a single `AskUserQuestion`:
+
+1. **What's this returns model for?** — Live deal pricing decision, case study / interview / sourcing exercise, internal practice, sensitivity analysis on an existing structure.
+2. **Who's the audience and what does success look like?** — Deal team, partner, IC, external case-study reviewer. The audience changes which sensitivities to surface.
+3. **What's already been deliberately decided so the build doesn't re-litigate?** — Structure choices (equity-only vs LBO vs tranched growth equity vs structured pref), entry valuation framework, debt structure if known, exit multiple methodology, scenario definitions (e.g., "downside = revenue flat, base = 25% CAGR, upside = mgmt"). These are the things the user is treating as inputs, not questions.
+
+Keep answers brief. If skipped, default to "live deal, internal audience, plain equity check, no structure specified" and note in the report header.
+
+### 0b. Read sibling AI work and analysis BEFORE building
+
+Inside the deal folder, look for and read these BEFORE Phase 1:
+- `AI Work/*.md` — prior AI-generated artifacts. **Especially `Deal Structure*`, `Returns*`, or any document explaining the structure rationale.** The "why is this deal tranched / capped / participating" answer often lives here.
+- `Analysis/*.md` — the user's framing notes
+- Any `*Notes*` or `*Questions*` files
+- `reports/` — prior reviews
+
+Cite these in the report — if the user has already written down "the Step 2 tranche exists to protect downside while preserving upside conversion," your returns model should reflect and quantify that thesis, not ignore it.
+
+### 0c. Structured deals — special rule (CRITICAL for this skill)
+
+If the deal is structured (tranched, preferred with cap/floor, contingent funding, participation rights), single-case MOIC/IRR is **the wrong primary output**. The structure exists precisely BECAUSE of asymmetric payoffs:
+
+- **Downside protection** via liquidation preference, accruing coupon, walk-away rights on later tranches
+- **Upside participation** via conversion features
+- **Dilution control** for founders, which is the negotiation lever that gets the structure accepted
+
+For any structured deal, build the model with:
+
+- **Multi-scenario returns:** downside / base / upside exit valuations
+- **Structured vs vanilla counterfactual** at EACH scenario (not just base)
+- **Probability-weighted MOIC and IRR** if the user has a view
+- **Sensitivity to the optionality moments:** what happens if Step 2 isn't funded, what happens if conversion triggers, what the cap protects
+
+If the user provides only single-case inputs, push back once: *"This looks like a structured deal. Single-case returns will understate the structure's value. Want me to model downside / base / upside scenarios with the structured-vs-vanilla delta at each?"* If they decline, proceed with single-case but note the limitation prominently.
+
+### 0d. Default assumption: intentional until proven otherwise
+
+If existing returns work has unusual definitions or apparent inconsistencies (e.g., a "Variance L2 vs Vanilla" row that doesn't match the headline MOIC delta), the FIRST hypothesis is intentional — often these rows show **founder dilution variance** rather than investor variance. Read carefully before flagging.
+
 ## Phase 1 — Gather inputs
 
 Ask the user (or pull from ops model + config):

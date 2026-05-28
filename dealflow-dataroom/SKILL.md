@@ -123,6 +123,34 @@ Store this as `DEAL_NAME` — it will be used in all report headers.
 
 Record the current timestamp as `START_TIME` when the skill begins execution. This will be used in the report metadata to calculate duration.
 
+## Phase 0 — Context (do this FIRST, before reading the data room)
+
+A data room assessment without context produces a generic rubric scoring exercise that misses what the senior reader actually wants flagged. Before opening any data room file, do TWO things:
+
+### 0a. Ask the user three quick context questions
+
+Use a single `AskUserQuestion`:
+
+1. **What's this assessment for?** — Live deal under LOI, case study / interview, sourcing exercise, internal practice, second-opinion on a deal a colleague is leading.
+2. **Who's the audience and what does success look like?** — Lead deal team, partner pre-read, IC, an external firm reviewing your judgment, the seller (rare — but changes tone).
+3. **What's already been deliberately decided so the assessment doesn't waste time questioning it?** — Investment thesis, scope of diligence already underway by third parties (QoE, legal), known gaps the user is comfortable with, and any documents the user has already deeply reviewed.
+
+Keep answers brief and weave into how findings get triaged. If skipped, default to "live deal, internal audience, nothing pre-decided" and note that in the report header.
+
+### 0b. Read sibling AI work and analysis BEFORE the data room
+
+Inside the deal folder (parent of the data room if a subfolder), look for and read these BEFORE the inventory pass:
+- `AI Work/*.md` — prior AI-generated artifacts (deal structure docs, prior reviews, framing notes). These often contain the WHY behind diligence choices.
+- `Analysis/*.md` and `Analysis/*.docx` — the user's own framing notes
+- Any `*Notes*`, `*Questions*`, or `Memo Feedback*` files at the project root
+- `reports/` — any prior assessment reports
+
+Cite these in the final assessment when relevant — don't reinvent findings the user has already worked through.
+
+### 0c. Default assumption: intentional until proven otherwise
+
+A "missing" document is often a deliberate scope decision (covered by counsel, not in scope for this round, post-LOI only). Before flagging a gap, ask: is this missing or just not yet shared? Read sibling docs and ask the user before flagging.
+
 ## Phase 1: Inventory & Triage
 
 Scan the folder tree. Read **filenames and folder structure only** — do not open files yet.

@@ -110,6 +110,38 @@ Store this as `DEAL_NAME` — it will be used in the report header.
 
 Record the current timestamp as `START_TIME` when the skill begins execution. This will be used in the report metadata to calculate duration.
 
+## Phase 0 — Context (do this FIRST, before opening the model)
+
+A model review without context produces a generic mechanical scrub that treats deliberate design choices as bugs and misses what the senior reader actually wants understood about the business. Before opening the workbook, do TWO things:
+
+### 0a. Ask the user three quick context questions
+
+Use a single `AskUserQuestion`:
+
+1. **What's this model review for?** — Live deal under LOI, case study / interview / sourcing exercise, internal practice on someone else's model, second-opinion before sending it up.
+2. **Who's the audience and what does success look like?** — Lead deal team, partner pre-read, IC, external case-study reviewer. Each wants different things surfaced.
+3. **What's already been deliberately decided so the review doesn't waste time questioning it?** — Structure choices (tranched / preferred / earn-out), starting BS plugs inherited from data room files, intentional case framing (e.g., "BW Base = base, MGMT tab = bull"), scope cuts, unusual KPI definitions the user owns. Anything in the model that's there on purpose.
+
+Keep answers brief and weave into how findings get triaged. If skipped, default to "live deal, internal audience, nothing pre-decided" and note in the report header.
+
+### 0b. Read sibling AI work and analysis BEFORE the model
+
+Inside the deal folder (parent of the model file), look for and read these BEFORE opening the workbook:
+- `AI Work/*.md` — prior AI-generated artifacts (deal structure docs, earlier model reviews, framing notes). These often contain the WHY behind the model's design choices.
+- `Analysis/*.md` and `Analysis/*.docx` — the user's own framing notes
+- Any `*Notes*`, `*Questions*`, or `Memo Feedback*` files at the project root
+- `reports/` — any prior review reports
+
+Cite these in the final review when relevant — don't treat the model as if it exists in isolation.
+
+### 0c. Default assumption: intentional until proven otherwise
+
+For anyone with real deal experience, "this looks wrong" is usually "I don't yet understand why." When you see something unusual (a balance-sheet plug, a tranched structure, a case label that doesn't fit, comp inflation patterns that seem flipped, a sign-flipped accrued liabilities ratio), the FIRST hypothesis is intentional design. Read the sibling docs, ask the user, THEN flag if still unexplained. Do not flag deliberate choices as bugs.
+
+### 0d. Structured deals — special rule
+
+If the model has a structured deal (tranched investment, preferred with cap/floor, contingent funding, vanilla counterfactual tab, "Step 1 / Step 2" framing), single-case MOIC/IRR comparisons against a vanilla counterfactual are the WRONG test. The structure exists for asymmetric payoffs (downside protection, dilution control, upside conversion). The correct test is multi-scenario returns. If the model only has a single exit case, flag the ABSENCE of multi-scenario analysis — not the base-case underperformance vs vanilla.
+
 ## Phase 1: Model Comprehension
 
 Open the workbook **twice** — this is critical:

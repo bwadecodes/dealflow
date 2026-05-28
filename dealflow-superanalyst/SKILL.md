@@ -43,6 +43,34 @@ python3 "$DEALFLOW_ROOT/scripts/dealflow-state.py" init "<deal-folder>"
 python3 "$DEALFLOW_ROOT/scripts/dealflow-index.py" init "<deal-folder>"
 ```
 
+## Phase 0 — Context (do this FIRST, before mode work)
+
+Super-analyst output without context produces analyses that miss the user's actual question and treats deliberate design choices in existing analyses as bugs. Before any mode work, do TWO things:
+
+### 0a. Ask the user three quick context questions
+
+Use a single `AskUserQuestion`:
+
+1. **What's this analysis for?** — Live deal diligence, case study / interview, internal practice, second-opinion on someone else's analysis.
+2. **Who's the audience and what does success look like?** — Lead deal team, partner pre-read, IC, external case-study reviewer. Each wants different surfacing.
+3. **What's already been deliberately decided so the analysis doesn't waste time questioning it?** — In create mode: thesis lens, scope cuts, what kind of analyses are NOT useful. In enhance/review mode: design choices in the existing analysis that the user owns (segmentation choices, time period definitions, cohort cut-offs, formula structures).
+
+Keep answers brief and weave into mode work. If skipped, default to "live deal, internal audience, nothing pre-decided" and note in the summary.
+
+### 0b. Read sibling AI work and analysis BEFORE starting
+
+If a deal folder is provided, look for and read these BEFORE running:
+- `AI Work/*.md` — prior AI-generated artifacts (analytical framings, prior super-analyst runs, design docs). These often contain the WHY behind the analytical approach.
+- `Analysis/*.md` and `Analysis/*.docx` — the user's own framing notes
+- Any `*Notes*`, `*Questions*`, or `Memo Feedback*` files at the project root
+- `reports/` — any prior review reports
+
+Cite these in the markdown summary when relevant — don't reinvent analyses the user has already worked through.
+
+### 0c. Default assumption: intentional until proven otherwise
+
+In enhance/review mode especially: when you see something unusual in the existing workbook (a non-standard segmentation, an off-cycle period definition, a hardcoded plug, a formula that looks fragile), the FIRST hypothesis is intentional design. Read the sibling docs, ask the user, THEN flag if still unexplained. Do not flag deliberate choices as bugs.
+
 ## Mode: CREATE
 
 ### Phase 1 — Profile the data

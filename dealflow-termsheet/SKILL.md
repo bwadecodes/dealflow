@@ -41,6 +41,38 @@ If `False`, warn: *"No firm-style profile found. Term sheet draft will use gener
 
 Init state and index.
 
+## Phase 0 — Context (do this FIRST, before reading the cap table)
+
+A term sheet draft without context produces generic firm-style terms that may completely miss the deal-specific structural choices the user has already made. Before reading the cap table, do TWO things:
+
+### 0a. Ask the user three quick context questions
+
+Use a single `AskUserQuestion`:
+
+1. **What's this term sheet for?** — Real signed-LOI deal heading to term sheet, case study / interview, internal practice, comparative analysis of structure choices.
+2. **Who's the audience and what does success look like?** — Counsel review, partner sign-off, IC pre-read, external reviewer evaluating structure judgment.
+3. **What's already been deliberately decided about the structure so the draft doesn't re-open it?** — Tranched vs single-close structure, liquidation preference type (non-participating / participating / capped), pro rata rights, anti-dilution flavor (broad-based weighted avg / full ratchet), board composition. If the user has already negotiated or pre-committed to specific terms, those are inputs to the draft, not questions to re-open.
+
+Keep answers brief. If skipped, default to "real deal, counsel + partner audience, firm-style defaults, nothing pre-decided" and note in the analysis.
+
+### 0b. Read sibling AI work and analysis BEFORE the cap table
+
+Inside the deal folder, look for and read these BEFORE Phase 1:
+- `AI Work/*.md` — prior AI-generated artifacts. **Especially `Deal Structure*` or any document explaining the structure rationale.** Term sheet terms should reflect the strategic logic of the structure, not just firm defaults.
+- `Analysis/*.md` — the user's framing notes
+- Any `*Notes*`, `*Questions*`, or `Memo Feedback*` files
+- `reports/` — prior reviews (esp. returns analysis if it exists)
+
+Cite these in the analysis when relevant. If the user has already written down "we want a 2-step close with a cap on Step 2 preference," your term sheet draft should reflect that thesis.
+
+### 0c. Default assumption: intentional until proven otherwise
+
+If the existing cap table or charter has unusual terms (non-standard preferences, unusual pay-to-play, custom anti-dilution), the FIRST hypothesis is that prior investors negotiated those on purpose. Note them; don't reflexively normalize to firm-style defaults in the draft. Ask the user before stripping non-standard inherited terms.
+
+### 0d. Structured deals — special note
+
+If this is a structured deal (tranched, capped preference, contingent funding), the term sheet's value lives in the structural terms (Step 2 trigger conditions, walk-away rights, conversion mechanics, anti-dilution scope). Spend disproportionate effort on those vs. the boilerplate. If a returns model exists in `AI Work/` or `reports/`, the term sheet should align with the structure that model assumes.
+
 ## Phase 1 — Read cap table
 
 Open with the dual-pattern. Identify:

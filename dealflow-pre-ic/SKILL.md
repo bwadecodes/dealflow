@@ -36,6 +36,42 @@ python3 "$DEALFLOW_ROOT/scripts/dealflow-state.py" init "<deal-folder>"
 python3 "$DEALFLOW_ROOT/scripts/dealflow-index.py" init "<deal-folder>"
 ```
 
+## Phase 0 — Context (do this FIRST, before anything else)
+
+Pre-IC is the highest-stakes review in dealflow — it's the work product that goes from the deal team to the partnership the day before IC. A context-free pre-IC produces a generic pressure test that misses what the IC will actually challenge and can re-litigate decisions the deal team has already settled.
+
+Before opening any materials, do TWO things:
+
+### 0a. Ask the user three quick context questions
+
+Use a single `AskUserQuestion`:
+
+1. **What's this pre-IC for?** — Live deal heading to IC, case study / interview / sourcing exercise, internal practice, devil's advocate for a deal the user is championing.
+2. **Who's the audience and what does success look like?** — The full IC, a specific partner who's the toughest skeptic, an external firm reviewing your judgment. The audience changes which IC questions to pre-empt.
+3. **What's already been deliberately decided so pre-IC doesn't re-litigate?** — Structure choices (tranched / preferred / earn-out), valuation framework, scope of diligence (what's done by counsel vs by the team), known weaknesses the team has already gut-checked and accepted, framing decisions (e.g., "we're presenting only a base case, not three cases — that's intentional"). These are the things you should NOT re-question — but you SHOULD pre-empt the IC's challenges to them.
+
+Keep answers brief and weave them into how findings get triaged. If skipped, default to "live IC deal, IC audience, nothing pre-decided" and note in the report header.
+
+### 0b. Read sibling AI work and analysis BEFORE the audit
+
+Inside the deal folder, look for and read these BEFORE Phase 1:
+- `AI Work/*.md` — prior AI-generated artifacts (deal structure docs, prior VP review, framing notes, IC question prep). These often contain the WHY behind design choices and the team's own internal debate.
+- `Analysis/*.md` and `Analysis/*.docx` — the user's own framing notes and valuation work
+- Any `*Notes*`, `*Questions*`, or `Memo Feedback*` files at the project root
+- `reports/` — prior vp-review, data room, model, returns reports
+
+Cite these in the final pre-IC report when relevant — don't reinvent findings the team has already worked through.
+
+### 0c. Default assumption: intentional until proven otherwise
+
+For anyone with real deal experience, "this looks wrong" is usually "I don't yet understand why." When you see something unusual (a BS plug, a tranched structure with seemingly weaker base-case returns, missing downside case, an unconventional comp set), the FIRST hypothesis is intentional design. Read the sibling docs and ask the user before flagging.
+
+### 0d. Structured deals — special rule
+
+If the deal is structured (tranched investment, preferred with cap/floor, contingent funding, vanilla counterfactual tab, "Step 1 / Step 2" framing), single-case MOIC/IRR comparisons against a vanilla counterfactual are the WRONG test. The structure exists for asymmetric payoffs (downside protection, dilution control, upside conversion). The correct test is multi-scenario returns. If the model only has a single exit case, the IC will ask "what's the downside MOIC" — so should you. Flag the ABSENCE of multi-scenario analysis as the gap, not the base-case underperformance vs vanilla.
+
+Also: pre-IC should pre-empt the IC's three hardest questions on structure, not flag the structure itself as a problem.
+
 ## Phase 1 — Run VP review checks first
 
 This skill includes everything VP review does. Do not skip those — the IC will not forgive a math error any more than a strategic gap.

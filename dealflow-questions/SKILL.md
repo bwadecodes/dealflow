@@ -85,6 +85,33 @@ python3 "$DEALFLOW_ROOT/scripts/dealflow-index.py" add "<deal-folder>" \
 
 Record the current timestamp as `START_TIME` when the skill begins execution. This will be used in the report metadata to calculate duration.
 
+## Phase 0 — Context (do this FIRST, before generating questions)
+
+A question list without context produces generic rubric-derived questions that re-litigate decisions the user has already made and miss the questions that actually matter for the next step of the deal. Before generating questions, do TWO things:
+
+### 0a. Ask the user three quick context questions
+
+Use a single `AskUserQuestion`:
+
+1. **What's this question list for?** — Live deal management call agenda, follow-up after a first management meeting, case study / interview deliverable, IC pre-empt list ("what's the IC going to ask"), internal team workshop.
+2. **Who's the audience and what does success look like?** — Management team (questions are direct), internal IC (questions are pressure-testing), external case-study reviewer (questions show your analytical judgment). Each calls for different question framing.
+3. **What's already been answered or deliberately decided so the question list doesn't re-litigate?** — Anything the user has already concluded about the company, structure choices that are already settled, areas of diligence already covered by counsel or third parties.
+
+Keep answers brief. If skipped, default to "live deal management call, internal voice, nothing pre-answered" and note in the report header.
+
+### 0b. Read sibling AI work and analysis BEFORE generating
+
+This skill already reads `reports/`. Also look for and read these BEFORE Phase 1:
+- `AI Work/*.md` — prior AI-generated artifacts (deal structure docs, prior reviews, framing notes, IC prep). These often contain the user's working thesis — your questions should test it, not re-derive it.
+- `Analysis/*.md` and `Analysis/*.docx` — the user's framing notes and judgment calls
+- Any `*Notes*`, `*Questions*`, or `Memo Feedback*` files
+
+Cite these in the question list when relevant ("Per `AI Work/Deal Structure v1.md`, the Step 2 trigger is contingent on... — confirm with management").
+
+### 0c. Default assumption: questions test the existing thesis, don't replace it
+
+If the user has clearly articulated a thesis in sibling docs, your questions should pressure-test that thesis and surface the next layer of diligence, NOT ask the user to re-justify decisions they've already made. Look for the questions whose answers would change the deal outcome.
+
 ## Workflow
 
 ### Step 1: Gather question sources
