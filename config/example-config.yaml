@@ -1,15 +1,15 @@
 # Dealflow Diligence Configuration — Example Template
 #
 # This is an annotated template you can use as a starting point.
-# Copy this file, customize it, and pass it to any /dd-* skill:
+# Copy this file, customize it, and pass it to any /dealflow-* skill:
 #
-#   /dd-dataroom ~/Deals/Acme --config path/to/my-config.yaml
+#   /dealflow-dataroom ~/Deals/Acme --config path/to/my-config.yaml
 #
 # Or save it to the default location and it will be picked up automatically:
 #
 #   ~/.claude/dealflow/diligence-config.yaml
 #
-# Tip: Start with /dd-setup instead of editing this by hand — it will
+# Tip: Start with /dealflow-setup instead of editing this by hand — it will
 # walk you through each section using one of the built-in templates
 # (PE, VC, or Growth Equity) as a starting point.
 
@@ -104,7 +104,7 @@ buy_box:
 # Controls how reports are generated and saved.
 
 preferences:
-  output_dir: "dd-reports"        # relative to the deal folder, or an absolute path
+  output_dir: "reports"        # relative to the deal folder, or an absolute path
   report_format: "markdown"       # "markdown", "html", or "both"
                                   # html produces a styled, professional report suitable
                                   # for printing or sharing with senior stakeholders

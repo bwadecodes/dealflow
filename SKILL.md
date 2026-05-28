@@ -37,29 +37,29 @@ Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (Anthropi
 
 **Set up your diligence config** (one-time, ~3 minutes):
 ```
-/dd-setup
+/dealflow-setup
 ```
 
 **Assess a data room:**
 ```
-/dd-dataroom ~/Deals/Acme-Corp/Data-Room "B2B SaaS, ~$8M ARR, Series A"
+/dealflow-dataroom ~/Deals/Acme-Corp/Data-Room "B2B SaaS, ~$8M ARR, Series A"
 ```
 
 **Review a financial model:**
 ```
-/dd-model ~/Deals/Acme-Corp/Model/Acme-Model-v3.xlsx
+/dealflow-model ~/Deals/Acme-Corp/Model/Acme-Model-v3.xlsx
 ```
 
 **Generate diligence questions:**
 ```
-/dd-questions ~/Deals/Acme-Corp
+/dealflow-questions ~/Deals/Acme-Corp
 ```
 
 ---
 
 ## First-Time Setup
 
-Run `/dd-setup` to configure your diligence preferences. It walks you through choosing a starting template and customizing your rubric, buy box, and report preferences.
+Run `/dealflow-setup` to configure your diligence preferences. It walks you through choosing a starting template and customizing your rubric, buy box, and report preferences.
 
 Five built-in templates:
 
@@ -77,19 +77,19 @@ Pick the closest fit. You can customize every question, weight, and buy box crit
 
 ## Skills Reference
 
-### `/dd-setup` --- Configuration Wizard
+### `/dealflow-setup` --- Configuration Wizard
 
 Builds your diligence config file --- your rubric, buy box criteria, and report preferences. Run this once. Update it when your investment criteria change.
 
-### `/dd-dataroom` --- Data Room Assessment
+### `/dealflow-dataroom` --- Data Room Assessment
 
 Reads a folder of deal documents and produces a structured assessment against your rubric. Inventories the room, flags gaps, reads documents by priority, and delivers findings organized by rubric category with strength/concern flags. Handles PDFs, Excel, Word, CSV, and images. Works on messy folder structures.
 
-### `/dd-model` --- Financial Model Review
+### `/dealflow-model` --- Financial Model Review
 
 Reads an Excel model (.xlsx) and produces a business-intelligence review. Maps the business model, traces key drivers, tests assumptions against historicals, and surfaces inflection points, operating leverage, and hidden risks. Opens the workbook twice --- once for formulas (model structure), once for values (actual numbers).
 
-### `/dd-questions` --- Diligence Question List
+### `/dealflow-questions` --- Diligence Question List
 
 Synthesizes findings from the data room and model reviews into a prioritized question list. Questions include the "why" --- what triggered each one --- so the reasoning is clear to anyone reading the list. Deduplicates overlapping items and categorizes by domain (financial, product, market, team, legal, customer, technology).
 
@@ -128,7 +128,7 @@ The templates are starting points. Every investor's process is different --- cus
 
 Dealflow currently focuses on diligence --- the highest-value, most-frequent workflow. Planned additions:
 
-- **`/dd-memo`** --- Draft an IC pre-screen or diligence memo from findings
+- **`/dealflow-memo`** --- Draft an IC pre-screen or diligence memo from findings
 - **`/src-deepdive`** --- Thematic research on an industry or trend
 - **`/src-screen`** --- Screen companies against buy box criteria
 - **`/pd-180`** --- Build and track a 180-day post-close plan

@@ -1,5 +1,5 @@
 ---
-name: dd-setup
+name: dealflow-setup
 description: Set up your diligence configuration — choose a starting template and customize your rubric, buy box, and preferences. Run this before your first data room review.
 allowed-tools:
   - Read
@@ -11,7 +11,7 @@ allowed-tools:
 
 # Diligence Setup
 
-Configure your diligence preferences. This builds a config file that all other `/dd-*` skills use to tailor their analysis to your investment approach.
+Configure your diligence preferences. This builds a config file that all other `/dealflow-*` skills use to tailor their analysis to your investment approach.
 
 ## Prerequisites
 
@@ -84,7 +84,7 @@ Show the buy box section and ask the user to confirm or customize:
 Show preferences and confirm:
 
 > **Report preferences:**
-> - Output directory: `dd-reports` (relative to deal folder, or an absolute path like `~/Dropbox/Reports`)
+> - Output directory: `reports` (relative to deal folder, or an absolute path like `~/Dropbox/Reports`)
 > - Report format: `both` (saves markdown + styled HTML for sharing), `markdown`, or `html`
 > - Detail level: `deep` (full analysis) or `executive` (shorter)
 > - Auto-save reports: yes
@@ -101,7 +101,7 @@ mkdir -p ~/.claude/dealflow
 
 Then use `Write` to save the final YAML config.
 
-Confirm: *"Config saved to ~/.claude/dealflow/diligence-config.yaml. You're ready to run /dd-dataroom or /dd-model on your next deal."*
+Confirm: *"Config saved to ~/.claude/dealflow/diligence-config.yaml. You're ready to run /dealflow-dataroom or /dealflow-model on your next deal."*
 
 ## Error Handling
 

@@ -101,7 +101,7 @@ buy_box:
   hold_period: "3-7 years"
 
 preferences:
-  output_dir: "dd-reports"
+  output_dir: "reports"
   report_format: "both"
   detail_level: "deep"
   auto_save: true

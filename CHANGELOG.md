@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.0.0 --- 2026-05-28
+
+### Breaking changes
+- **Skill rename** — all skills move from `/dd-*` to `/dealflow-*` for a single, consistent naming convention across the package:
+  - `/dd-setup` → `/dealflow-setup`
+  - `/dd-dataroom` → `/dealflow-dataroom`
+  - `/dd-model` → `/dealflow-model`
+  - `/dd-questions` → `/dealflow-questions`
+- **Reports directory** — default output renamed from `dd-reports/` to `reports/`. Existing v1 directories continue to work.
+
+### Foundation for v2 expansion
+- Adds `design-spec-v2.md` capturing the expanded v2 architecture: deal state + persistent index (`.dealflow/`), shared Excel/PDF authors, expansive firm-style profile, and 11 new skills (firmstyle, prescreen, deskresearch, superanalyst, cohort, vp-review, pre-ic, process, checklist, returns, termsheet).
+- v1 `design-spec.md` retained as historical reference.
+
 ## 1.1.0 --- 2026-03-14
 
 ### Report improvements

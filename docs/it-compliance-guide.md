@@ -42,7 +42,7 @@ Your Machine                         Anthropic API
 2. Claude Code reads the files on the user's machine
 3. File contents are sent to [Anthropic's API](https://www.anthropic.com/api) over HTTPS (TLS encrypted)
 4. The API processes the content and returns analysis
-5. Results are written as markdown files to a local `dd-reports/` folder
+5. Results are written as markdown files to a local `reports/` folder
 
 **No data is stored on third-party servers beyond the API interaction itself.*
 

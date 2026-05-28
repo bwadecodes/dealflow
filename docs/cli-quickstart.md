@@ -109,7 +109,7 @@ claude
 This starts Claude Code. Then type:
 
 ```
-/dd-setup
+/dealflow-setup
 ```
 
 It will ask you a few questions about your investment approach and save your preferences. Takes about 3 minutes.
@@ -119,7 +119,7 @@ It will ask you a few questions about your investment approach and save your pre
 Point it at a folder of deal documents:
 
 ```
-/dd-dataroom ~/Dropbox/Deals/Acme-Corp/Data-Room "B2B SaaS, ~$8M ARR"
+/dealflow-dataroom ~/Dropbox/Deals/Acme-Corp/Data-Room "B2B SaaS, ~$8M ARR"
 ```
 
 Replace the path with wherever your deal files are. The context string in quotes is optional but helps the analysis.
@@ -127,23 +127,23 @@ Replace the path with wherever your deal files are. The context string in quotes
 ### 3. Review a financial model
 
 ```
-/dd-model ~/Dropbox/Deals/Acme-Corp/Model/Acme-Model-v3.xlsx
+/dealflow-model ~/Dropbox/Deals/Acme-Corp/Model/Acme-Model-v3.xlsx
 ```
 
 ### 4. Generate diligence questions
 
 ```
-/dd-questions ~/Dropbox/Deals/Acme-Corp
+/dealflow-questions ~/Dropbox/Deals/Acme-Corp
 ```
 
-Reports are saved in a `dd-reports` folder inside your deal directory.
+Reports are saved in a `reports` folder inside your deal directory.
 
 ---
 
 ## Tips
 
 - **Allow permissions for Dealflow skills.** Claude Code asks for permission each time a skill reads a file or runs a command. For Dealflow, this means dozens of prompts during a single data room scan. To avoid this, run Claude Code with `claude --dangerously-skip-permissions` or type `/permissions` inside a session to auto-allow the tools Dealflow uses (Read, Write, Bash, Glob, Grep). Only do this if you're comfortable with Claude Code accessing files in your deal folder.
-- **You don't need to memorize commands.** Type `/dd-` and Claude Code will show you the available skills.
+- **You don't need to memorize commands.** Type `/dealflow-` and Claude Code will show you the available skills.
 - **You can ask follow-up questions.** After any report is generated, just type your question in the same session --- "dig deeper into the financials," "compare the P&L across years," etc.
 - **Reports don't overwrite each other.** Each run is dated, so you can re-run as new documents come in.
 - **If something goes wrong,** the error messages tell you what to do. Most issues are a missing Python library (the tool will tell you the install command) or a wrong file path.

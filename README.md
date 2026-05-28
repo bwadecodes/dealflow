@@ -37,7 +37,7 @@ Inside a Claude Code session, run:
 /plugin install dealflow@dealflow
 ```
 
-The first command adds the Dealflow marketplace. The second installs the plugin with all four `/dd-*` skills.
+The first command adds the Dealflow marketplace. The second installs the plugin with all four `/dealflow-*` skills.
 
 Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (Anthropic's CLI tool). If you don't have it yet, the [CLI Quickstart](docs/cli-quickstart.md) walks you through the full setup — Node.js, Python, Claude Code, and Dealflow — in one pass.
 
@@ -52,32 +52,32 @@ Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (Anthropi
 
 **1. Set up your diligence config** (one-time, ~3 minutes):
 ```
-/dd-setup
+/dealflow-setup
 ```
 Choose from five starting templates, customize your rubric and buy box, and save your preferences. Every other skill reads this config.
 
 **2. Assess a data room:**
 ```
-/dd-dataroom ~/Deals/Acme-Corp/Data-Room "B2B SaaS, ~$8M ARR, Series A, 200 enterprise customers"
+/dealflow-dataroom ~/Deals/Acme-Corp/Data-Room "B2B SaaS, ~$8M ARR, Series A, 200 enterprise customers"
 ```
 
 **3. Review a financial model:**
 ```
-/dd-model ~/Deals/Acme-Corp/Model/Acme-Model-v3.xlsx "B2B SaaS, Series A at $40M pre"
+/dealflow-model ~/Deals/Acme-Corp/Model/Acme-Model-v3.xlsx "B2B SaaS, Series A at $40M pre"
 ```
 
 **4. Generate diligence questions:**
 ```
-/dd-questions ~/Deals/Acme-Corp
+/dealflow-questions ~/Deals/Acme-Corp
 ```
 
-Reports are saved to a `dd-reports/` folder inside your deal directory, dated so multiple runs don't overwrite each other.
+Reports are saved to a `reports/` folder inside your deal directory, dated so multiple runs don't overwrite each other.
 
 ---
 
 ## Skills
 
-### `/dd-setup` — Configuration Wizard
+### `/dealflow-setup` — Configuration Wizard
 
 Builds your diligence config file — your rubric, buy box criteria, and report preferences. Run this once before your first data room review. Update it when your investment criteria change or when you want a different config for a different fund.
 
@@ -94,14 +94,14 @@ You can maintain multiple configs (e.g., one for your PE fund, one for personal 
 
 ---
 
-### `/dd-dataroom` — Data Room Assessment
+### `/dealflow-dataroom` — Data Room Assessment
 
 Reads a deal's data room folder and produces a structured diligence assessment against your rubric. This is the workhorse skill — it handles everything from a clean 20-file room to a messy 600-file dump.
 
 **Invocation:**
 ```
-/dd-dataroom <path-to-data-room-folder>
-/dd-dataroom <path-to-data-room-folder> "<optional deal context>"
+/dealflow-dataroom <path-to-data-room-folder>
+/dealflow-dataroom <path-to-data-room-folder> "<optional deal context>"
 ```
 
 **How it works:**
@@ -110,7 +110,7 @@ Reads a deal's data room folder and produces a structured diligence assessment a
 
 **Phase 2 — Structured Assessment.** Reads documents in priority order using parallel subagents (3-4 max) to manage context windows on large rooms — one agent handles financials and accounting, another legal and IP, another product and market, another team and customers. For each rubric category, produces findings with specific document references, strength/concern flags (green, yellow, red), information quality notes, and cross-references where documents corroborate or contradict each other.
 
-**Phase 3 — Report Output.** Saves a structured report to `dd-reports/dataroom-assessment-YYYY-MM-DD.md` with:
+**Phase 3 — Report Output.** Saves a structured report to `reports/dataroom-assessment-YYYY-MM-DD.md` with:
 - **Executive summary** — 1-page overview, overall confidence level, top 3 strengths, top 3 concerns
 - **Buy box fit** — how the deal maps to your criteria, with specific callouts on fit and misfit
 - **Category assessments** — one section per rubric category with findings, flags, and evidence
@@ -124,14 +124,14 @@ Reads a deal's data room folder and produces a structured diligence assessment a
 
 ---
 
-### `/dd-model` — Financial Model Review
+### `/dealflow-model` — Financial Model Review
 
 Reads a financial model (.xlsx) and produces a business-intelligence-focused review — understanding the business model, mapping key drivers, testing assumptions, and surfacing the data points that matter most for your investment decision.
 
 **Invocation:**
 ```
-/dd-model <path-to-excel-file>
-/dd-model <path-to-excel-file> "<optional deal context>"
+/dealflow-model <path-to-excel-file>
+/dealflow-model <path-to-excel-file> "<optional deal context>"
 ```
 
 **How it works:**
@@ -149,17 +149,17 @@ Outputs a plain-English summary: *"This is a 5-year SaaS model built on a bottom
 - **Hidden risks** — assumptions that are internally inconsistent or unusually optimistic
 - **Assumptions to test** — the 5-10 assumptions that matter most and need validation
 
-**Phase 4 — Report Output.** Saves to `dd-reports/model-review-YYYY-MM-DD.md` with run metadata (time, duration, model, tokens, cost), then drops into interactive mode for follow-up questions.
+**Phase 4 — Report Output.** Saves to `reports/model-review-YYYY-MM-DD.md` with run metadata (time, duration, model, tokens, cost), then drops into interactive mode for follow-up questions.
 
 ---
 
-### `/dd-questions` — Diligence Question List
+### `/dealflow-questions` — Diligence Question List
 
-Synthesizes findings from the data room assessment and model review into a single, prioritized list of diligence questions. Works best after `/dd-dataroom` and `/dd-model` have run (reads their reports from `dd-reports/`). Can also run standalone.
+Synthesizes findings from the data room assessment and model review into a single, prioritized list of diligence questions. Works best after `/dealflow-dataroom` and `/dealflow-model` have run (reads their reports from `reports/`). Can also run standalone.
 
 **Invocation:**
 ```
-/dd-questions <path-to-deal-folder>
+/dealflow-questions <path-to-deal-folder>
 ```
 
 **How it builds the list:**
@@ -205,7 +205,7 @@ The rubric is the backbone of every assessment. It determines what gets prioriti
 | **PE Middle Market** | $75M – $250M revenue | Operational complexity, platform strategy, leverage |
 | **PE Large Buyout** | $250M+ revenue | Capital structure, integration, regulatory, institutional ops |
 
-These templates are starting points, not limits. During `/dd-setup`, you can ask the AI to generate a custom rubric for any strategy — late-stage VC, investment banking, corporate development, credit, real estate, or anything else. Just describe your approach and it builds one from scratch.
+These templates are starting points, not limits. During `/dealflow-setup`, you can ask the AI to generate a custom rubric for any strategy — late-stage VC, investment banking, corporate development, credit, real estate, or anything else. Just describe your approach and it builds one from scratch.
 
 The templates aren't cosmetically different — they reflect how different types of investors actually think about diligence. VC weights founder dynamics and market; Growth Equity blends financial rigor with growth metrics; PE templates scale from earnings quality at the lower end to capital structure and platform strategy at the upper end.
 
@@ -230,7 +230,7 @@ buy_box:
   sector_focus: ["consumer", "technology", "healthcare"]
 
 preferences:
-  output_dir: "dd-reports"
+  output_dir: "reports"
   detail_level: "deep"      # deep | executive
 ```
 
@@ -241,7 +241,7 @@ Weights affect everything — high-weight categories get analyzed first in data 
 You can maintain different configs for different contexts and pass them per invocation:
 
 ```
-/dd-dataroom ~/Deals/Acme --config ~/.claude/dealflow/configs/pe-buyout.yaml
+/dealflow-dataroom ~/Deals/Acme --config ~/.claude/dealflow/configs/pe-buyout.yaml
 ```
 
 ---
@@ -254,7 +254,7 @@ You can maintain different configs for different contexts and pass them per invo
 
 **Context management:** Large data rooms (hundreds of files) are triaged — Phase 1 reads filenames only, Phase 2 reads selectively based on rubric priority. The data room skill uses parallel subagents (3-4) to split the work across rubric categories, each with its own context window. If subagent dispatch fails, it falls back to sequential processing.
 
-**Reports:** All output is markdown, saved to `{deal-folder}/dd-reports/` with date stamps. Reports from different runs don't overwrite each other. Each report includes run metadata — model used, token counts, duration, and estimated cost — so you always know what an analysis cost. v1 is markdown-only; DOCX export is planned.
+**Reports:** All output is markdown, saved to `{deal-folder}/reports/` with date stamps. Reports from different runs don't overwrite each other. Each report includes run metadata — model used, token counts, duration, and estimated cost — so you always know what an analysis cost. v1 is markdown-only; DOCX export is planned.
 
 ---
 
@@ -275,7 +275,7 @@ Dealflow currently covers **diligence** — the highest-value, most-frequent inv
 **Diligence (expanding)**
 | Skill | Purpose |
 |-------|---------|
-| `/dd-memo` | Draft an IC pre-screen or full diligence memo from findings |
+| `/dealflow-memo` | Draft an IC pre-screen or full diligence memo from findings |
 
 **Sourcing**
 | Skill | Purpose |

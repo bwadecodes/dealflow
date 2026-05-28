@@ -14,7 +14,7 @@ Dealflow runs on [Anthropic's API](https://www.anthropic.com/api), which charges
 
 **What does NOT cost money:**
 - Installing Dealflow (open-source, MIT license)
-- Running the configuration wizard (`/dd-setup`)
+- Running the configuration wizard (`/dealflow-setup`)
 - The reports themselves — they're saved as local files on your machine
 - Re-reading reports or asking follow-up questions about content already in context
 
@@ -57,9 +57,9 @@ PDFs are extracted as text via pymupdf. Scanned PDFs with charts or images are a
 | Small | Simple reports, single-tab summaries | 1–3 | ~2,000 | **$0.02** |
 | Medium | Budgets, revenue breakdowns, customer analyses | 5–10 | ~10,000 | **$0.06** |
 | Large | Full financial models, detailed operating builds | 15+ | ~35,000 | **$0.18** |
-| Model (via `/dd-model`) | The primary financial model — read twice (formulas + values) | 15+ | ~70,000 | **$0.37** |
+| Model (via `/dealflow-model`) | The primary financial model — read twice (formulas + values) | 15+ | ~70,000 | **$0.37** |
 
-The financial model review (`/dd-model`) reads the workbook twice — once for formulas to understand the model structure and once for computed values to see the actual numbers. This doubles the input tokens for that specific file.
+The financial model review (`/dealflow-model`) reads the workbook twice — once for formulas to understand the model structure and once for computed values to see the actual numbers. This doubles the input tokens for that specific file.
 
 ### Word Documents
 
@@ -103,9 +103,9 @@ Not all 200 documents are read cover-to-cover. The data room skill triages by ru
 
 | Skill | What It Does | Input Tokens | Output Tokens | Cost |
 |-------|-------------|-------------|---------------|------|
-| `/dd-dataroom` | Full data room assessment | ~940K | ~57K | **$6.14** |
-| `/dd-model` | Financial model review | ~240K | ~35K | **$2.08** |
-| `/dd-questions` | Prioritized question list | ~85K | ~10K | **$0.68** |
+| `/dealflow-dataroom` | Full data room assessment | ~940K | ~57K | **$6.14** |
+| `/dealflow-model` | Financial model review | ~240K | ~35K | **$2.08** |
+| `/dealflow-questions` | Prioritized question list | ~85K | ~10K | **$0.68** |
 | **Full pipeline** | **All three skills** | **~1,265K** | **~102K** | **$8.90** |
 
 Add 3–5 follow-up questions in interactive mode: +$0.50–$1.50.
@@ -225,7 +225,7 @@ Yes. The Anthropic API console allows you to set monthly spending limits. If the
 Yes, but minimally. Each follow-up question in interactive mode costs roughly $0.10–$0.30 depending on how much document context is still loaded. The first few follow-ups are cheap because the documents are already in context.
 
 **What if we only need the model review, not the full data room?**
-Skills are independent. Running `/dd-model` alone costs ~$2 per model. You don't pay for skills you don't run.
+Skills are independent. Running `/dealflow-model` alone costs ~$2 per model. You don't pay for skills you don't run.
 
 **Does the cost scale linearly with document count?**
 Roughly, yes. A 100-document room costs about half of a 200-document room. However, the system overhead (instructions, report generation) is fixed, so very small rooms have a slightly higher per-document cost.

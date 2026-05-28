@@ -1,5 +1,5 @@
 ---
-name: dd-dataroom
+name: dealflow-dataroom
 description: Assess a deal data room against your diligence rubric. Point it at a folder of deal documents and get a structured assessment with findings, flags, gap analysis, and recommended next steps.
 allowed-tools:
   - Read
@@ -18,8 +18,8 @@ Read a deal's data room and produce a structured diligence assessment against yo
 ## Invocation
 
 ```
-/dd-dataroom <path-to-data-room-folder>
-/dd-dataroom <path-to-data-room-folder> "<deal context>"
+/dealflow-dataroom <path-to-data-room-folder>
+/dealflow-dataroom <path-to-data-room-folder> "<deal context>"
 ```
 
 The optional context string helps tailor the analysis — e.g., "B2B SaaS, ~$8M ARR, Series A, 200 enterprise customers."
@@ -32,7 +32,7 @@ These rules apply to every report. Check each one before saving. A report missin
 2. **Run Metadata block:** Every report includes the `## Run Metadata` table immediately after the header — time initiated, duration, model, input tokens, output tokens, estimated cost. If token counts are unavailable (agent cannot introspect usage), write "See session stats" for those fields. Time, duration, and model name are always available — never skip them.
 3. **HTML export:** Default to producing **both** `.md` and `.html` files. Only produce one format if the config explicitly sets `report_format` to `"markdown"` or `"html"`. If the config field is missing or empty, default to `"both"`.
 4. **Flagged documents:** The report must include a `## Documents Flagged for Follow-Up` table. Every subagent must flag documents during its read pass (see Phase 2, step 4). If no documents need flagging, include the section header with "No documents flagged."
-5. **Shared template:** HTML reports use the template at `config/report-template.html` in the dealflow plugin directory. All `/dd-*` skills use the same template.
+5. **Shared template:** HTML reports use the template at `config/report-template.html` in the dealflow plugin directory. All `/dealflow-*` skills use the same template.
 6. **Presentability:** These reports get shared with senior investment professionals. Professional formatting matters.
 
 ## Prerequisites
@@ -42,7 +42,7 @@ These rules apply to every report. Check each one before saving. A report missin
 Look for the diligence config in this order:
 1. If a `--config` path was passed in the invocation, use that file
 2. `~/.claude/dealflow/diligence-config.yaml` (default location)
-3. If neither exists, tell the user: *"No config found. Run /dd-setup first to set up your diligence preferences, or I can use the default PE Lower-Middle Market template."*
+3. If neither exists, tell the user: *"No config found. Run /dealflow-setup first to set up your diligence preferences, or I can use the default PE Lower-Middle Market template."*
 4. If they want to proceed without setup, load the PE default from the plugin directory:
    ```
    Glob **/dealflow/config/defaults/pe-lower-middle-market.yaml
@@ -238,7 +238,7 @@ After all subagents return, the main agent synthesizes:
 
 ### Determine output directory
 
-Read the config's `preferences.output_dir` value. If set, use it (it can be a relative path from the deal folder, or an absolute path). If not set, default to `dd-reports`.
+Read the config's `preferences.output_dir` value. If set, use it (it can be a relative path from the deal folder, or an absolute path). If not set, default to `reports`.
 
 ```bash
 mkdir -p "<output-dir>"
@@ -435,9 +435,9 @@ The HTML file can be opened in any browser and printed to PDF for sharing with s
 
 After saving, tell the user:
 
-> **Report saved to `<path>/dd-reports/dataroom-assessment-YYYY-MM-DD.md`.**
+> **Report saved to `<path>/reports/dataroom-assessment-YYYY-MM-DD.md`.**
 >
-> You can ask me follow-up questions about anything in the room — dig into specific documents, compare data across files, or explore areas the report flagged. Or move on to `/dd-model` for a financial model review or `/dd-questions` to generate your diligence question list.
+> You can ask me follow-up questions about anything in the room — dig into specific documents, compare data across files, or explore areas the report flagged. Or move on to `/dealflow-model` for a financial model review or `/dealflow-questions` to generate your diligence question list.
 
 Stay active for follow-ups. When the user asks a question:
 - If the answer is in the report or in documents still in context, answer directly
@@ -452,6 +452,6 @@ Stay active for follow-ups. When the user asks a question:
 | Password-protected file | *"[filename] is password-protected. Remove the password and re-run, or I'll skip it."* |
 | Python not installed | *"Python is required for reading Excel and PDF files. Install it from python.org and try again."* |
 | pip install fails | *"Couldn't install a required library. Try running: pip install pymupdf openpyxl python-docx"* |
-| Config not found | *"No config found. Run /dd-setup first, or I can use the default PE template."* |
+| Config not found | *"No config found. Run /dealflow-setup first, or I can use the default PE template."* |
 | Unsupported file type | *"Skipping [filename] — file type not supported. Supported: PDF, Excel, Word, CSV, images."* |
 | Very large room (200+ files) | Warn the user that processing will take time. Triage aggressively — read high-priority documents first, summarize low-priority ones from filenames only. |

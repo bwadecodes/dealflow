@@ -3,8 +3,8 @@ I'm building a Claude Code skills package called "dealflow" — AI-powered due d
 The spec has been through two rounds of review and is ready for implementation. Here's where we left off:
 
 WHAT'S DONE:
-- Full design spec covering 4 skills: /dd-setup, /dd-dataroom, /dd-model, /dd-questions
-- Package architecture decided (modular skills, dd- prefix)
+- Full design spec covering 4 skills: /dealflow-setup, /dealflow-dataroom, /dealflow-model, /dealflow-questions
+- Package architecture decided (modular skills, dealflow- prefix as of v2)
 - 5 default config templates: PE lower-middle-market, PE middle market, PE large buyout, venture capital, growth equity
 - Documentation plan: CLI quickstart for finance people, IT/compliance guide, rubric customization guide
 - Technical decisions: openpyxl dual-open for Excel, inline pip installs, 3-4 subagents max for data room, markdown-only output in v1

@@ -2,6 +2,8 @@
 
 **Design Spec — March 12, 2026**
 
+> ⚠️ **Superseded by `design-spec-v2.md` (May 2026).** This document describes the v1 architecture (`/dd-*` skill prefix, four diligence skills, no shared state/index). It is retained as historical reference. For the current architecture and skill list, see [`design-spec-v2.md`](./design-spec-v2.md).
+
 ## Overview
 
 Dealflow is a Claude Code skills package that gives PE and VC investors structured, AI-assisted due diligence workflows. Point it at a data room folder or a financial model, and it produces the kind of analysis you'd normally spend days on — organized against your own diligence rubric.

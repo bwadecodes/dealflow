@@ -14,12 +14,12 @@ Your config file is stored at:
 ~/.claude/dealflow/diligence-config.yaml
 ```
 
-Run `/dd-setup` to create or update it interactively. Or edit the YAML file directly --- it's human-readable and well-commented.
+Run `/dealflow-setup` to create or update it interactively. Or edit the YAML file directly --- it's human-readable and well-commented.
 
 You can also maintain multiple configs and pass a specific one to any skill:
 
 ```
-/dd-dataroom ~/Deals/Acme --config ~/configs/my-pe-config.yaml
+/dealflow-dataroom ~/Deals/Acme --config ~/configs/my-pe-config.yaml
 ```
 
 ---
@@ -39,7 +39,7 @@ buy_box:         # Your investment criteria
   ...
 
 preferences:     # Report settings
-  output_dir: "dd-reports"
+  output_dir: "reports"
   ...
 ```
 
@@ -227,7 +227,7 @@ You can maintain different configs for different contexts:
 Pass the one you want:
 
 ```
-/dd-dataroom ~/Deals/Acme --config ~/.claude/dealflow/configs/pe-buyout.yaml
+/dealflow-dataroom ~/Deals/Acme --config ~/.claude/dealflow/configs/pe-buyout.yaml
 ```
 
-Or just switch your default by re-running `/dd-setup`.
+Or just switch your default by re-running `/dealflow-setup`.

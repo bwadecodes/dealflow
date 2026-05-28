@@ -1,5 +1,5 @@
 ---
-name: dd-model
+name: dealflow-model
 description: Review a financial model (.xlsx) — understand the business model, map key drivers, test assumptions, and surface the data points that matter most for your investment decision.
 allowed-tools:
   - Read
@@ -17,8 +17,8 @@ Read a financial model and produce a business-intelligence-focused review — un
 ## Invocation
 
 ```
-/dd-model <path-to-excel-file>
-/dd-model <path-to-excel-file> "<deal context>"
+/dealflow-model <path-to-excel-file>
+/dealflow-model <path-to-excel-file> "<deal context>"
 ```
 
 The optional context string helps frame the analysis — e.g., "B2B SaaS, Series A at $40M pre, net revenue retention 120%."
@@ -30,17 +30,17 @@ These rules apply to every report. Check each one before saving. A report missin
 1. **Header:** `# [DEAL_NAME] — Financial Model Review — YYYY-MM-DD HH:MM`. Never use generic headers like "Financial Model Review: [Deal Name]".
 2. **Run Metadata block:** Every report includes the `## Run Metadata` table immediately after the header — time initiated, duration, model, input tokens, output tokens, estimated cost. If token counts are unavailable (agent cannot introspect usage), write "See session stats" for those fields. Time, duration, and model name are always available — never skip them.
 3. **HTML export:** Default to producing **both** `.md` and `.html` files. Only produce one format if the config explicitly sets `report_format` to `"markdown"` or `"html"`. If the config field is missing or empty, default to `"both"`.
-4. **Shared template:** HTML reports use the template at `config/report-template.html` in the dealflow plugin directory. All `/dd-*` skills use the same template.
+4. **Shared template:** HTML reports use the template at `config/report-template.html` in the dealflow plugin directory. All `/dealflow-*` skills use the same template.
 5. **Presentability:** These reports get shared with senior investment professionals. Professional formatting matters.
 
 ## Prerequisites
 
 ### 1. Load the config
 
-Same resolution order as `/dd-dataroom`:
+Same resolution order as `/dealflow-dataroom`:
 1. If a `--config` path was passed in the invocation, use that file
 2. `~/.claude/dealflow/diligence-config.yaml` (default location)
-3. If neither exists: prompt user to run `/dd-setup` or offer to use the default template
+3. If neither exists: prompt user to run `/dealflow-setup` or offer to use the default template
 4. Locate defaults: `Glob **/dealflow/config/defaults/pe-lower-middle-market.yaml`
 
 ### 2. Check Python + openpyxl
@@ -165,7 +165,7 @@ The business intelligence layer — this is where the review earns its value:
 
 ### Determine output directory
 
-Read the config's `preferences.output_dir` value. If set, use it (it can be a relative path from the deal folder, or an absolute path). If not set, default to `dd-reports`.
+Read the config's `preferences.output_dir` value. If set, use it (it can be a relative path from the deal folder, or an absolute path). If not set, default to `reports`.
 
 Determine the deal folder — use the parent directory of the model file's location.
 
@@ -303,9 +303,9 @@ Generate the styled HTML report:
 
 After saving:
 
-> **Report saved to `<path>/dd-reports/model-review-YYYY-MM-DD.md`.**
+> **Report saved to `<path>/reports/model-review-YYYY-MM-DD.md`.**
 >
-> You can ask me to dig deeper into any part of the model — specific tabs, assumptions, scenarios, or comparisons. Or move on to `/dd-questions` to build your diligence question list.
+> You can ask me to dig deeper into any part of the model — specific tabs, assumptions, scenarios, or comparisons. Or move on to `/dealflow-questions` to build your diligence question list.
 
 For follow-ups, re-read specific tabs as needed. Reference exact cell ranges and formulas when answering questions.
 

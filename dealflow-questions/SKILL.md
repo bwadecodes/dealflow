@@ -1,6 +1,6 @@
 ---
-name: dd-questions
-description: Generate a prioritized diligence question list from data room findings, model review, and your rubric. Works best after /dd-dataroom and /dd-model, but can run standalone.
+name: dealflow-questions
+description: Generate a prioritized diligence question list from data room findings, model review, and your rubric. Works best after /dealflow-dataroom and /dealflow-model, but can run standalone.
 allowed-tools:
   - Read
   - Write
@@ -17,10 +17,10 @@ Synthesize findings from the data room assessment and model review into a single
 ## Invocation
 
 ```
-/dd-questions <path-to-deal-folder>
+/dealflow-questions <path-to-deal-folder>
 ```
 
-The deal folder should contain a `dd-reports/` subdirectory with prior assessment outputs. If no prior reports exist, the skill works directly from whatever documents are in the folder.
+The deal folder should contain a `reports/` subdirectory with prior assessment outputs. If no prior reports exist, the skill works directly from whatever documents are in the folder.
 
 ## Report Requirements (Non-Negotiable)
 
@@ -29,30 +29,30 @@ These rules apply to every report. Check each one before saving. A report missin
 1. **Header:** `# [DEAL_NAME] — Diligence Questions — YYYY-MM-DD HH:MM`. Never use generic headers like "Diligence Questions: [Deal Name]".
 2. **Run Metadata block:** Every report includes the `## Run Metadata` table immediately after the header — time initiated, duration, model, input tokens, output tokens, estimated cost. If token counts are unavailable (agent cannot introspect usage), write "See session stats" for those fields. Time, duration, and model name are always available — never skip them.
 3. **HTML export:** Default to producing **both** `.md` and `.html` files. Only produce one format if the config explicitly sets `report_format` to `"markdown"` or `"html"`. If the config field is missing or empty, default to `"both"`.
-4. **Shared template:** HTML reports use the template at `config/report-template.html` in the dealflow plugin directory. All `/dd-*` skills use the same template.
+4. **Shared template:** HTML reports use the template at `config/report-template.html` in the dealflow plugin directory. All `/dealflow-*` skills use the same template.
 5. **Presentability:** These reports get shared with senior investment professionals. Professional formatting matters.
 
 ## Prerequisites
 
 ### 1. Load the config
 
-Same resolution order as other `/dd-*` skills:
+Same resolution order as other `/dealflow-*` skills:
 1. `~/.claude/dealflow/diligence-config.yaml`
-2. If not found: prompt user to run `/dd-setup` or offer to use the default template
+2. If not found: prompt user to run `/dealflow-setup` or offer to use the default template
 
 ### 2. Check for prior reports
 
 ```
-Glob <deal-folder>/dd-reports/*.md
+Glob <deal-folder>/reports/*.md
 ```
 
 Look for:
-- `dataroom-assessment-*.md` — from `/dd-dataroom`
-- `model-review-*.md` — from `/dd-model`
+- `dataroom-assessment-*.md` — from `/dealflow-dataroom`
+- `model-review-*.md` — from `/dealflow-model`
 
 If found, read them with `Read`. Use the most recent of each (sort by date in filename).
 
-If no reports exist, note that the questions will be generated from the rubric and any documents in the folder directly. Tell the user: *"No prior reports found in dd-reports/. I'll generate questions from your rubric and what's in the folder. For better results, run /dd-dataroom and /dd-model first."*
+If no reports exist, note that the questions will be generated from the rubric and any documents in the folder directly. Tell the user: *"No prior reports found in reports/. I'll generate questions from your rubric and what's in the folder. For better results, run /dealflow-dataroom and /dealflow-model first."*
 
 ## Timing
 
@@ -117,7 +117,7 @@ Every question includes the **"why"** — what finding or gap triggered it. This
 
 Before generating questions, determine the **deal/company name**:
 
-1. If prior reports exist in `dd-reports/`, extract DEAL_NAME from the report headers
+1. If prior reports exist in `reports/`, extract DEAL_NAME from the report headers
 2. Otherwise, use the deal folder name
 3. If the folder name is generic, use `AskUserQuestion` to ask: *"What's the company/deal name?"*
 
@@ -125,7 +125,7 @@ Before generating questions, determine the **deal/company name**:
 
 ### Determine output directory
 
-Read the config's `preferences.output_dir` value. If set, use it (it can be a relative path from the deal folder, or an absolute path). If not set, default to `dd-reports`.
+Read the config's `preferences.output_dir` value. If set, use it (it can be a relative path from the deal folder, or an absolute path). If not set, default to `reports`.
 
 ```bash
 mkdir -p "<output-dir>"
@@ -239,7 +239,7 @@ Generate the styled HTML report:
 
 After saving:
 
-> **Report saved to `<path>/dd-reports/diligence-questions-YYYY-MM-DD.md`.**
+> **Report saved to `<path>/reports/diligence-questions-YYYY-MM-DD.md`.**
 >
 > [count] questions generated — [X] critical, [Y] important, [Z] nice to have.
 >
@@ -256,5 +256,5 @@ Handle follow-ups like:
 | Scenario | Response |
 |----------|----------|
 | No deal folder found | *"Can't find that folder. Check the path and try again."* |
-| No reports and no documents | *"No reports or documents found. Run /dd-dataroom on your data room first, or point me at a folder with deal documents."* |
-| Config not found | *"No config found. Run /dd-setup first, or I can use the default PE template."* |
+| No reports and no documents | *"No reports or documents found. Run /dealflow-dataroom on your data room first, or point me at a folder with deal documents."* |
+| Config not found | *"No config found. Run /dealflow-setup first, or I can use the default PE template."* |
