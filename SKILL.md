@@ -171,7 +171,7 @@ The templates are starting points. Every investor's process is different --- cus
 
 Dealflow v2 covers the full deal lifecycle from prescreen through term sheet. The next layer of work focuses on **sourcing** (industry deep dives, company screening, pipeline tracking) and **post-deal** (180-day plans, board prep, portfolio monitoring) — each as its own future release.
 
-For internals: every deal builds a persistent index in `<deal-folder>/.dealflow/` so skills compose cleanly and don't re-read files unnecessarily. The firm-style profile in `~/.claude/dealflow/firm-style.yaml` shapes voice and visual identity across every output.
+For internals: every deal builds a persistent index in `<deal-folder>/.dealflow/` so skills compose cleanly and don't re-read files unnecessarily. The firm-style profile in `~/.claude/dealflow/firm-style.yaml` shapes voice and visual identity across every output, layered on top of the baseline writing rules in `docs/report-style-guide.md` (IC-ready: plain language, defined abbreviations, bullets over dense paragraphs, no AI-artifact phrasing).
 
 ---
 

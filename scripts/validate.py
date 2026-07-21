@@ -36,6 +36,7 @@ EXPECTED_FILES = [
     "dealflow-termsheet/SKILL.md",
     "docs/cli-quickstart.md",
     "docs/it-compliance-guide.md",
+    "docs/report-style-guide.md",
     "docs/rubric-guide.md",
 ]
 

@@ -31,7 +31,11 @@ _DEFAULTS: dict[str, Any] = {
     "version": 1,
     "firm_name": None,
     "voice": {
-        "tone": "professional, direct, no jargon",
+        "tone": (
+            "IC-ready: plain language, direct, evidence-anchored; no coined "
+            "jargon, no glib idioms, no filler intensifiers; written for a "
+            "first-time reader with every abbreviation defined"
+        ),
         "hedging": "moderate",
         "length_preference": "balanced",
         "perspective": "first_person_plural",

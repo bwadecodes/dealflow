@@ -152,6 +152,8 @@ Every factual claim in the body must have a numbered citation `[12]` pointing to
 
 ## Phase 4 — Output
 
+Write in IC-ready style per `docs/report-style-guide.md` in the plugin directory — plain language, abbreviations defined, bullets over dense paragraphs, written for a first-time reader — and apply `firm-style.yaml` voice if configured.
+
 Determine output location:
 
 - If `--deal-folder` was provided: `<deal-folder>/reports/desk-research-<topic>-YYYY-MM-DD.md`
