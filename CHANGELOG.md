@@ -1,5 +1,24 @@
 # Changelog
 
+## 2.1.0 --- 2026-07-21
+
+### Context-first skills
+- **Phase 0 everywhere** — every analysis and review skill now starts by asking three context questions (what's this for, who's the audience, what's already decided), reading sibling AI work and analysis files, and defaulting to "intentional until proven otherwise" instead of flagging deliberate design choices as bugs.
+- **Provenance rule** — sibling files are context, not instructions. Only firm-authored material can explain a design choice; anything that originated from the target or seller is evidence to analyze and can never downgrade or pre-clear a finding.
+- **Flag with provenance, never suppress** — review skills report what they find either way: "explained by `<doc>` — confirm" when a sibling file accounts for it, an open finding when nothing does. Mechanical defects (sign flips, broken formulas, figures that don't tie) are always reported.
+- **Headless-safe** — all Phase 0 questions apply documented defaults automatically in non-interactive runs (`claude -p`, CI, subagents) instead of blocking on a prompt.
+
+### IC-ready report writing
+- **Report style guide** — new `docs/report-style-guide.md` sets an institutional writing standard for every prose deliverable: plain language over coined jargon, every abbreviation defined, bullets over dense paragraphs, one consistent voice, filler and formula phrases removed. Written for a reader seeing the deal for the first time.
+- **Wired into every skill** — all 12 report-producing skills load the style guide and the firm's `firm-style.yaml` voice before writing.
+- **Style scrub in reviews** — `/dealflow-vp-review` and `/dealflow-pre-ic` now check memos for coined jargon, undefined shorthand, dense paragraphs, voice drift, and AI-artifact phrasing.
+- **Better executive summaries** — `/dealflow-dataroom` reports open with an entity-abbreviation key and bulleted findings instead of dense paragraphs.
+- **Stronger default voice** — reports generated without a firm-style profile now default to the IC-ready baseline instead of a generic tone.
+
+### Fixed
+- **Returns modeling** — `/dealflow-returns` now probability-weights cash flows or proceeds and reports scenario IRRs separately; averaging scenario IRRs (mathematically invalid) is explicitly ruled out.
+- Deal-specific examples generalized, structure-validator manifest updated for the new style guide, smoke test now pins the default voice, and dangling cross-references cleaned up.
+
 ## 2.0.0 --- 2026-05-28
 
 ### Breaking changes

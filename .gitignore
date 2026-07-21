@@ -25,3 +25,6 @@ dd-reports/
 
 # Plan artifacts (development only)
 docs/superpowers/
+
+# Codex consult session state (machine-local)
+.context/

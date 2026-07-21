@@ -12,7 +12,7 @@
       "name": "dealflow",
       "source": "./",
       "description": "AI-powered due diligence tools for PE and VC investors",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "author": {
         "name": "Brian Wade"
       }
