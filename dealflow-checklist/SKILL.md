@@ -124,6 +124,8 @@ If there are open questions in any memo or review, surface them.
 
 Write to `<deal-folder>/reports/checklist-YYYY-MM-DD.md`.
 
+Write in IC-ready style per `docs/report-style-guide.md` in the plugin directory — plain language, abbreviations defined, bullets over dense paragraphs, written for a first-time reader — and apply `firm-style.yaml` voice if configured.
+
 For console: print a tight version to stdout so the user gets a quick read without opening the file.
 
 ## Phase 4 — Quick analysis

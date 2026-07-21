@@ -225,9 +225,11 @@ You can maintain different configs for different contexts and pass them per invo
 
 **File reading:** PDFs via [pymupdf](https://pymupdf.readthedocs.io/), Excel via [openpyxl](https://openpyxl.readthedocs.io/) (dual-open: formulas + cached values), Word via [python-docx](https://python-docx.readthedocs.io/). CSV and images read directly. Python dependencies install automatically on first run.
 
+**Context first:** Analysis and review skills open with a short context step (Phase 0) — what's this report for, who's the audience, what's already been decided — and read your prior notes and AI work in the deal folder before analyzing. Deliberate design choices get confirmed against your own documents instead of being flagged as bugs, and in non-interactive runs the questions fall back to documented defaults instead of blocking.
+
 **Context management:** Large data rooms (hundreds of files) are triaged — Phase 1 reads filenames only, Phase 2 reads selectively based on rubric priority. The data room skill uses parallel subagents (3-4) to split the work across rubric categories, each with its own context window. If subagent dispatch fails, it falls back to sequential processing.
 
-**Reports:** All output is markdown, saved to `{deal-folder}/reports/` with date stamps. Reports from different runs don't overwrite each other. Each report includes run metadata — model used, token counts, duration, and estimated cost — so you always know what an analysis cost. v1 is markdown-only; DOCX export is planned.
+**Reports:** Reports save to `{deal-folder}/reports/` with date stamps, so reports from different runs don't overwrite each other. The core diligence reports — data room, model, and questions — save as Markdown plus a styled HTML version by default (shared template, configurable via `report_format`) and include run metadata — model used, token counts, duration, and estimated cost. Prose across every report follows the IC-ready [Report Style Guide](docs/report-style-guide.md), with your firm's voice from `/dealflow-firmstyle` layered on top. Modeling skills also produce Excel workbooks, and some skills add PDF or DOCX deliverables.
 
 ---
 
@@ -238,6 +240,7 @@ You can maintain different configs for different contexts and pass them per invo
 | [CLI Quickstart](docs/cli-quickstart.md) | Investors new to the command line | Opening a terminal, navigating folders, installing Claude Code, running your first command |
 | [IT & Compliance Guide](docs/it-compliance-guide.md) | IT teams, compliance officers | Data flow, subscription tiers, security references, template approval email |
 | [Rubric Customization Guide](docs/rubric-guide.md) | All users | Adding/removing categories, adjusting weights, writing effective questions, maintaining multiple configs |
+| [Report Style Guide](docs/report-style-guide.md) | All users | The IC-ready writing standard every report follows — plain language, defined abbreviations, bullets over dense paragraphs, one consistent voice |
 
 ---
 

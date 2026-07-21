@@ -94,6 +94,11 @@ def main() -> int:
         print("\n[firmstyle]")
         profile = firmstyle.load_profile(Path("/nonexistent"))
         _check("defaults loaded when no profile", profile["version"] == 1)
+        _check(
+            "default tone is IC-ready baseline",
+            profile["voice"]["tone"].startswith("IC-ready:")
+            and "no coined jargon" in profile["voice"]["tone"],
+        )
         _check("brand defaults present", "primary_color" in firmstyle.get_brand(profile))
 
         # --- excel ---

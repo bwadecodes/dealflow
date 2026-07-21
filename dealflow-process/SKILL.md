@@ -168,6 +168,8 @@ PY
 
 ## Phase 5 — Write the process plan
 
+Write in IC-ready style per `docs/report-style-guide.md` in the plugin directory — plain language, abbreviations defined, bullets over dense paragraphs, written for a first-time reader — and apply `firm-style.yaml` voice if configured.
+
 `<deal-folder>/reports/deal-process-plan-YYYY-MM-DD.md`:
 
 ```markdown

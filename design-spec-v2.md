@@ -207,7 +207,7 @@ firm_name: "Primario Holdings"
 
 # ---------------- VOICE ----------------
 voice:
-  tone: "professional, direct, no jargon"
+  tone: "IC-ready: plain language, direct, evidence-anchored; no coined jargon, no glib idioms, no filler intensifiers; written for a first-time reader with every abbreviation defined"
   hedging: "moderate"                   # assertive | moderate | hedged
   length_preference: "concise"          # concise | balanced | thorough
   perspective: "first_person_plural"    # we, our team | third_person | mixed

@@ -90,8 +90,11 @@ This opens a browser window. Sign in, and you're connected.
 
 ### Step 4: Install Dealflow
 
-```bash
-claude install github:bwadecodes/dealflow
+Start Claude Code by typing `claude`, then run these two commands inside the session:
+
+```
+/plugin marketplace add bwadecodes/dealflow
+/plugin install dealflow@dealflow
 ```
 
 That's it. The diligence skills are now available.
