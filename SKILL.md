@@ -33,8 +33,11 @@ The [IT & Compliance Guide](docs/it-compliance-guide.md) has a one-page summary 
 
 ## Install
 
-```bash
-claude install github:bwadecodes/dealflow
+Inside a Claude Code session, run:
+
+```
+/plugin marketplace add bwadecodes/dealflow
+/plugin install dealflow@dealflow
 ```
 
 Requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (Anthropic's CLI tool). If you don't have it yet, the [CLI Quickstart](docs/cli-quickstart.md) walks you through setup.

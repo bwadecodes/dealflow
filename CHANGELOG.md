@@ -10,7 +10,7 @@
 
 ### IC-ready report writing
 - **Report style guide** — new `docs/report-style-guide.md` sets an institutional writing standard for every prose deliverable: plain language over coined jargon, every abbreviation defined, bullets over dense paragraphs, one consistent voice, filler and formula phrases removed. Written for a reader seeing the deal for the first time.
-- **Wired into every skill** — all 12 report-producing skills load the style guide and the firm's `firm-style.yaml` voice before writing.
+- **Wired into every skill** — all 13 report-producing skills load the style guide and the firm's `firm-style.yaml` voice before writing.
 - **Style scrub in reviews** — `/dealflow-vp-review` and `/dealflow-pre-ic` now check memos for coined jargon, undefined shorthand, dense paragraphs, voice drift, and AI-artifact phrasing.
 - **Better executive summaries** — `/dealflow-dataroom` reports open with an entity-abbreviation key and bulleted findings instead of dense paragraphs.
 - **Stronger default voice** — reports generated without a firm-style profile now default to the IC-ready baseline instead of a generic tone.
